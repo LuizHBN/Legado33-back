@@ -4,6 +4,8 @@ import br.com.legado33.app.access.Access;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 
 @Data
 @Getter
@@ -14,7 +16,6 @@ import lombok.*;
 @Entity
 @Table(name = "Usuario", schema = "legado33_mysql")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
@@ -29,4 +30,15 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "id_acesso", referencedColumnName = "id")
     private Access access;
+
+    public User(NewUserDTO userDTO){
+        this.name = userDTO.name();
+        this.mail = userDTO.mail();
+    }
+
+    @PrePersist
+    public void prePersist() {
+        access = new Access();
+        access.setId(1L);
+    }
 }
