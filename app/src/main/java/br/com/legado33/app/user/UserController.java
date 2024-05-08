@@ -1,13 +1,10 @@
 package br.com.legado33.app.user;
 
-import br.com.legado33.app.access.Access;
-import br.com.legado33.app.access.AccessRepository;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
-import org.springframework.security.config.annotation.web.servlet.configuration.WebMvcSecurityConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,9 +27,13 @@ public class UserController {
     }
 
     @PostMapping
-    public void createUser(@RequestBody NewUserDTO userDTO) {
+    public void createUser(@RequestBody @Valid NewUserDTO userDTO) {
         userRepository.save(new User(userDTO));
     }
+
+
+
+
     /*
 
     @GetMapping

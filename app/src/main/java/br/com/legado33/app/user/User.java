@@ -34,11 +34,9 @@ public class User {
     public User(NewUserDTO userDTO){
         this.name = userDTO.name();
         this.mail = userDTO.mail();
+        this.access = new Access();
+        this.access.setId(1L);
     }
 
-    @PrePersist
-    public void prePersist() {
-        access = new Access();
-        access.setId(1L);
-    }
+
 }
