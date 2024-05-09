@@ -37,6 +37,4 @@ public class User {
         this.access = new Access();
         this.access.setId(1L);
     }
-
-
 }

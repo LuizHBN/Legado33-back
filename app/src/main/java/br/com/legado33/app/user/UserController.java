@@ -11,51 +11,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/usuario")
 public class UserController {
 
-    private final UserRepository userRepository;
-
-   
-
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public UserController(UserService userService){
+        this.userService = userService;
     }
 
     @GetMapping
     public Page<ReadUserDTO> findAllUsers(Pageable page){
-        return userRepository.findAll(page).map(ReadUserDTO :: new);
+        return userService.getAllUsers(page);
     }
 
     @PostMapping
     public void createUser(@RequestBody @Valid NewUserDTO userDTO) {
-        userRepository.save(new User(userDTO));
+        userService.saveNewUser(userDTO);
     }
-
-
-
-
-    /*
-
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
-    }
-
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
-    }
-
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userService.updateUser(id, user);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-    }
-
-   */
-
 }
