@@ -1,9 +1,9 @@
 package br.com.legado33.app.transaction;
 
 import br.com.legado33.app.campaign.Campaign;
+import br.com.legado33.app.user.User;
 import jakarta.persistence.*;
 import lombok.*;
-import br.com.legado33.app.user.User;
 
 @Data
 @Getter
@@ -19,11 +19,11 @@ public class Transaction {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "Remetente", nullable = false)
-    private Integer sender;
+    @Column(name = "valor", nullable = false)
+    private Double value;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id", nullable = false, unique = true)
     private User user;
 
     @Enumerated(EnumType.STRING)
@@ -31,14 +31,18 @@ public class Transaction {
     private Type type;
 
     @ManyToOne
-    @JoinColumn(name = "idCampanha")
+    @JoinColumn(name = "idCampanha", referencedColumnName = "id")
     private Campaign campaign;
 
-    @Column(name = "Transferenciacol", length = 45)
-    private String transferColumn;
-
     public enum Type {
-        OFFERING,
-        TITHE
+        OFERTA,
+        DIZIMO
+    }
+
+    public Transaction(NewTransactionDTO transactionDTO){
+        this.value = transactionDTO.value();
+        this.campaign = transactionDTO.campaign();
+        this.type = transactionDTO.type();
+        this.user = transactionDTO.user();
     }
 }

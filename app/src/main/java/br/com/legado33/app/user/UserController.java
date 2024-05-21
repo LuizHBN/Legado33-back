@@ -23,6 +23,7 @@ public class UserController {
         return userService.getAllUsers(page);
     }
 
+    //TODO -> Mudar para responseEntity
     @PostMapping
     public void createUser(@RequestBody @Valid NewUserDTO userDTO) {
         userService.saveNewUser(userDTO);
