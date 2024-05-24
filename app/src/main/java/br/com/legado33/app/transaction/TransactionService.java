@@ -20,6 +20,6 @@ public class TransactionService {
     }
 
     public Page<ReadTransactionDTO> getAllTransactions(Pageable page){
-        transactionRepository.findAll(page).map(new ::)
+        return transactionRepository.findAll(page).map(ReadTransactionDTO::new);
     }
 }
