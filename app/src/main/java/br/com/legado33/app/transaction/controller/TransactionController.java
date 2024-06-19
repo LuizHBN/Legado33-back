@@ -1,5 +1,8 @@
-package br.com.legado33.app.transaction;
+package br.com.legado33.app.transaction.controller;
 
+import br.com.legado33.app.transaction.dto.NewTransactionDTO;
+import br.com.legado33.app.transaction.dto.ReadTransactionDTO;
+import br.com.legado33.app.transaction.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

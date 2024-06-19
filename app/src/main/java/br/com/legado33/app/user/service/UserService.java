@@ -1,7 +1,11 @@
-package br.com.legado33.app.user;
+package br.com.legado33.app.user.service;
 
 import br.com.legado33.app.access.Access;
 import br.com.legado33.app.access.AccessRepository;
+import br.com.legado33.app.user.User;
+import br.com.legado33.app.user.dto.NewUserDTO;
+import br.com.legado33.app.user.dto.ReadUserDTO;
+import br.com.legado33.app.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,4 +1,4 @@
-package br.com.legado33.app.transaction;
+package br.com.legado33.app.transaction.dto;
 
 import br.com.legado33.app.campaign.Campaign;
 import br.com.legado33.app.user.User;

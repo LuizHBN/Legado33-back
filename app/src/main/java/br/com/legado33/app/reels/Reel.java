@@ -1,6 +1,7 @@
 package br.com.legado33.app.reels;
 
 import br.com.legado33.app.category.Category;
+import br.com.legado33.app.reels.dto.NewReelDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

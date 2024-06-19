@@ -1,6 +1,7 @@
 package br.com.legado33.app.transaction;
 
 import br.com.legado33.app.campaign.Campaign;
+import br.com.legado33.app.transaction.dto.NewTransactionDTO;
 import br.com.legado33.app.user.User;
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package br.com.legado33.app.reels;
+package br.com.legado33.app.reels.dto;
 
 import br.com.legado33.app.category.Category;
 import jakarta.validation.constraints.NotBlank;

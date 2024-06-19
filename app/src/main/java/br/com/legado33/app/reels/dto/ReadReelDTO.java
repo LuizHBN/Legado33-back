@@ -1,6 +1,7 @@
-package br.com.legado33.app.reels;
+package br.com.legado33.app.reels.dto;
 
 import br.com.legado33.app.category.Category;
+import br.com.legado33.app.reels.Reel;
 
 public record ReadReelDTO(
     Long id,
