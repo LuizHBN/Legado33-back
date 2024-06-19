@@ -1,4 +1,4 @@
-package br.com.legado33.app.readContent;
+package br.com.legado33.app.readContent.dto;
 
 public record ReadContentDTO(
     Long id,

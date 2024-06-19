@@ -1,4 +1,4 @@
-package br.com.legado33.app.user;
+package br.com.legado33.app.user.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

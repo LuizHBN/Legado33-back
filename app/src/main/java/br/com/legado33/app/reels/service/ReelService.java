@@ -1,5 +1,10 @@
-package br.com.legado33.app.reels;
+package br.com.legado33.app.reels.service;
 
+import br.com.legado33.app.reels.Reel;
+import br.com.legado33.app.reels.dto.NewReelDTO;
+import br.com.legado33.app.reels.dto.ReadReelDTO;
+import br.com.legado33.app.reels.dto.UpdateReelDTO;
+import br.com.legado33.app.reels.repository.ReelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

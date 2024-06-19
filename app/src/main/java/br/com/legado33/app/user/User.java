@@ -1,10 +1,9 @@
 package br.com.legado33.app.user;
 
 import br.com.legado33.app.access.Access;
+import br.com.legado33.app.user.dto.NewUserDTO;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.UUID;
 
 
 @Data

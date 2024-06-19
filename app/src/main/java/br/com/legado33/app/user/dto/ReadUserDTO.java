@@ -1,6 +1,7 @@
-package br.com.legado33.app.user;
+package br.com.legado33.app.user.dto;
 
 import br.com.legado33.app.access.Access;
+import br.com.legado33.app.user.User;
 
 public record ReadUserDTO(
         Long id,

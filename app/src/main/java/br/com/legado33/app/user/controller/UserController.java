@@ -1,6 +1,9 @@
-package br.com.legado33.app.user;
+package br.com.legado33.app.user.controller;
 
 
+import br.com.legado33.app.user.service.UserService;
+import br.com.legado33.app.user.dto.NewUserDTO;
+import br.com.legado33.app.user.dto.ReadUserDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
