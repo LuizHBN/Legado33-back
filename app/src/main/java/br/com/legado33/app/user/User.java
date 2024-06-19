@@ -15,6 +15,7 @@ import lombok.*;
 @Entity
 @Table(name = "Usuario", schema = "legado33_mysql")
 public class User {
+    // teste belo
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
