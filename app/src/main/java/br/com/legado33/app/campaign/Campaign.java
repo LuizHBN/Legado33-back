@@ -12,7 +12,7 @@ import lombok.*;
 @Entity
 @Table(name = "Campanha", schema = "legado33_mysql")
 public class Campaign {
-
+// teste2
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)

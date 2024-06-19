@@ -3,6 +3,8 @@ package br.com.legado33.app.access;
 import jakarta.persistence.*;
 import lombok.*;
 
+//Teste Commit Gustavo
+
 @Data
 @Getter
 @Setter
