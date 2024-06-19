@@ -39,7 +39,7 @@ public class Transaction {
         OFERTA,
         DIZIMO
     }
-
+4
     public Transaction(NewTransactionDTO transactionDTO){
         this.value = transactionDTO.value();
         this.campaign = transactionDTO.campaign();
