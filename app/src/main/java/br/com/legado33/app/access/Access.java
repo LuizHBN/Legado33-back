@@ -1,5 +1,6 @@
 package br.com.legado33.app.access;
 
+import br.com.legado33.app.access.dto.NewAccessDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -47,4 +48,16 @@ public class Access {
 
     @Column(name = "editar_faq", nullable = false)
     private boolean canEditFaq;
+
+    public Access(NewAccessDTO accessDTO){
+        this.description = accessDTO.description();
+        this.canEditWorship = accessDTO.canEditWorship();
+        this.canEditReels = accessDTO.canEditReels();
+        this.canEditPosts = accessDTO.canEditPosts();
+        this.canAccessFinances = accessDTO.canAccessFinances();
+        this.canSendNotifications = accessDTO.canSendNotifications();
+        this.canReplyMessage = accessDTO.canReplyMessage();
+        this.canEditNews = accessDTO.canEditNews();
+        this.canEditFaq = accessDTO.canEditFaq();
+    }
 }
