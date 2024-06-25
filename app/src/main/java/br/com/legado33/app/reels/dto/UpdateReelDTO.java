@@ -1,10 +1,7 @@
 package br.com.legado33.app.reels.dto;
 
-import br.com.legado33.app.category.Category;
-
 public record UpdateReelDTO(
-    Long id,
-    String title,
-    String description,
-    Category category
+        String title,
+        String description,
+        Long category
 ) {}

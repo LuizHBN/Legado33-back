@@ -18,7 +18,7 @@ public record NewReelDTO(
     String description,
 
     @NotNull
-    Category category
+    Long category
 ) {
 
 }

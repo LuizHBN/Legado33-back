@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AccessService {
     private final AccessRepository repository;
@@ -15,11 +17,16 @@ public class AccessService {
         this.repository = repository;
     }
 
-    public Page<ReadAccessDTO> getAllAccesses(Pageable page){
+    public Page<ReadAccessDTO> findAllAccesses(Pageable page){
         return repository.findAll(page).map(ReadAccessDTO :: new);
     }
 
-    public void saveNewAccess(NewAccessDTO accessDTO){
-       repository.save(new Access(accessDTO));
+    public Access saveNewAccess(NewAccessDTO accessDTO){
+       return repository.save(new Access(accessDTO));
+    }
+
+    public Optional<ReadAccessDTO> findAccessById(Long id){
+        return repository.findById(id)
+                .map(ReadAccessDTO::new);
     }
 }

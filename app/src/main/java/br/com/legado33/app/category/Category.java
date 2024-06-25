@@ -1,5 +1,6 @@
 package br.com.legado33.app.category;
 
+import br.com.legado33.app.category.dto.CategoryService.ReadCategoryDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,5 +20,11 @@ public class Category {
     private Long id;
 
     @Column(name = "titulo", nullable = false, length = 255)
-    private String titulo;
+    private String title;
+
+
+    public Category(ReadCategoryDTO categoryDTO){
+        this.id = categoryDTO.id();
+        this.title = categoryDTO.title();
+    }
 }

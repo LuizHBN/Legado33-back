@@ -2,6 +2,7 @@ package br.com.legado33.app.reels;
 
 import br.com.legado33.app.category.Category;
 import br.com.legado33.app.reels.dto.NewReelDTO;
+import br.com.legado33.app.reels.dto.UpdateReelDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,13 +30,16 @@ public class Reel {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "id_categoria", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "id_categoria", referencedColumnName = "id")
     private Category category;
 
-    public Reel(NewReelDTO reelDTO) {
+    public Reel(NewReelDTO reelDTO, Category category) {
         this.link = reelDTO.link();
         this.title = reelDTO.title();
         this.description = reelDTO.description();
-        this.category = reelDTO.category();
+        this.category = category;
     }
+
+
+
 }

@@ -1,11 +1,13 @@
 package br.com.legado33.app.reels.controller;
 
-import br.com.legado33.app.reels.Reel;
+import br.com.legado33.app.reels.exceptions.ReelNotFoundException;
 import br.com.legado33.app.reels.service.ReelService;
 import br.com.legado33.app.reels.dto.NewReelDTO;
 import br.com.legado33.app.reels.dto.ReadReelDTO;
 import br.com.legado33.app.reels.dto.UpdateReelDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/reels")
+@RequiredArgsConstructor
 public class ReelController {
-
     private final ReelService reelService;
 
-    @Autowired
-    public ReelController(ReelService reelService) {
-        this.reelService = reelService;
-    }
-
-    @PostMapping
-    public ResponseEntity<Reel> createReel(@RequestBody NewReelDTO reelDTO) {
+    @PostMapping("/save")
+    public ResponseEntity<ReadReelDTO> createReel(@RequestBody @Valid NewReelDTO reelDTO) {
         return ResponseEntity.ok(reelService.saveNewReel(reelDTO));
     }
 
@@ -33,20 +30,33 @@ public class ReelController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reel> getReelById(@PathVariable Long id) {
-        return reelService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<ReadReelDTO> getReelById(@PathVariable Long id) {
+        try{
+            return  ResponseEntity.ok(reelService.findById(id));
+        }catch (EntityNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Reel> updateReel(@PathVariable Long id, @RequestBody UpdateReelDTO reelDTO) {
-        return ResponseEntity.ok(reelService.update(reelDTO));
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ReadReelDTO> updateReel(@PathVariable Long id, @Valid @RequestBody UpdateReelDTO reelDTO) {
+        if (reelDTO == null){
+            return ResponseEntity.notFound().build();
+        }
+        try {
+            return ResponseEntity.ok(reelService.update(reelDTO, id));
+        } catch (ReelNotFoundException e){
+           return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReel(@PathVariable Long id) {
-        reelService.delete(id);
-        return ResponseEntity.noContent().build();
+        try{
+            reelService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch(ReelNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 }

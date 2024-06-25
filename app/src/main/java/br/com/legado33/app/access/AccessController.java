@@ -2,14 +2,13 @@ package br.com.legado33.app.access;
 
 import br.com.legado33.app.access.dto.NewAccessDTO;
 import br.com.legado33.app.access.dto.ReadAccessDTO;
+import br.com.legado33.app.access.dto.UpdateAccessDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AccessController {
@@ -20,13 +19,29 @@ public class AccessController {
         this.service = service;
     }
 
-    @GetMapping
-    public Page<ReadAccessDTO> findAllAccess(Pageable page){
-        return service.getAllAccesses(page);
-    }
     @PostMapping
-    public void addAccess(@RequestBody @Valid NewAccessDTO accessDTO){
-        service.saveNewAccess(accessDTO);
+    public ResponseEntity<ReadAccessDTO> addAccess(@RequestBody @Valid NewAccessDTO accessDTO){
+        return ResponseEntity.ok(new ReadAccessDTO(service.saveNewAccess(accessDTO)));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<ReadAccessDTO>> getAllAccess(Pageable page){
+        return ResponseEntity.ok(service.findAllAccesses(page));
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<ReadAccessDTO> getAccessById(@PathVariable Long id){
+        return service.findAccessById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+//    public ResponseEntity<ReadAccessDTO> updateAccess(@PathVariable Long id, @RequestBody UpdateAccessDTO accessDTO){
+//
+//    }
+
+
+    public void deleteAccess(){
+
     }
 }
 
