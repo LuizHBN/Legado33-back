@@ -1,7 +1,6 @@
 package br.com.legado33.app.reels.service;
 
 import br.com.legado33.app.category.Category;
-import br.com.legado33.app.category.CategoryRepository;
 import br.com.legado33.app.category.dto.CategoryService.ReadCategoryDTO;
 import br.com.legado33.app.category.service.CategoryService.CategoryService;
 import br.com.legado33.app.reels.Reel;
@@ -31,7 +30,8 @@ public class ReelService {
     public ReadReelDTO saveNewReel(NewReelDTO reelDTO) {
         ReadCategoryDTO categoryDTO = categoryService.findById(reelDTO.category());
         Category category = new Category(categoryDTO);
-        Reel savedReel = reelRepository.save(new Reel(reelDTO, category));
+        Reel reel = new Reel(reelDTO, category);
+        Reel savedReel = reelRepository.save(reel);
         return new ReadReelDTO(savedReel);
     }
 
@@ -62,7 +62,7 @@ public class ReelService {
         reelRepository.deleteById(id);
     }
 
-    public Reel updateNotNullFieldFromDTO(UpdateReelDTO reelDTO, Reel reel ){
+    private Reel updateNotNullFieldFromDTO(UpdateReelDTO reelDTO, Reel reel ){
         if (reelDTO.title() != null) {
             reel.setTitle(reelDTO.title());
         }
