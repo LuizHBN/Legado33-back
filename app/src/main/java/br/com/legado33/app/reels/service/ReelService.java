@@ -55,10 +55,7 @@ public class ReelService {
     }
 
     public void delete(Long id) {
-        Reel existingReel = reelRepository
-                .findById(id)
-                .orElseThrow(() -> new ReelNotFoundException(id));
-
+        reelRepository.findById(id).orElseThrow(() -> new ReelNotFoundException(id));
         reelRepository.deleteById(id);
     }
 
