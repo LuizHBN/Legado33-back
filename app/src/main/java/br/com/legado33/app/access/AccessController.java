@@ -2,7 +2,6 @@ package br.com.legado33.app.access;
 
 import br.com.legado33.app.access.dto.NewAccessDTO;
 import br.com.legado33.app.access.dto.ReadAccessDTO;
-import br.com.legado33.app.access.dto.UpdateAccessDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

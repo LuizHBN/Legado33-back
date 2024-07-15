@@ -2,7 +2,6 @@ package br.com.legado33.app.category.service.CategoryService;
 
 import br.com.legado33.app.category.CategoryRepository;
 import br.com.legado33.app.category.dto.CategoryService.ReadCategoryDTO;
-import br.com.legado33.app.reels.dto.ReadReelDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

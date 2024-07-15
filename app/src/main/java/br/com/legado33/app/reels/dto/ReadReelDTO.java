@@ -2,7 +2,6 @@ package br.com.legado33.app.reels.dto;
 
 import br.com.legado33.app.category.Category;
 import br.com.legado33.app.reels.Reel;
-import org.springframework.http.ResponseEntity;
 
 public record ReadReelDTO(
     Long id,
