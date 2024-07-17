@@ -1,5 +1,6 @@
-package br.com.legado33.app.category;
+package br.com.legado33.app.category.repository;
 
+import br.com.legado33.app.category.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 //New Change
 

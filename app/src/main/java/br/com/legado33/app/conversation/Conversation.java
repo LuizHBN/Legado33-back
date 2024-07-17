@@ -1,5 +1,6 @@
 package br.com.legado33.app.conversation;
 
+import br.com.legado33.app.conversation.dto.NewConversationDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,4 +26,10 @@ public class Conversation {
 
     @Column(name = "imagem", length = 255)
     private String image;
+
+    public Conversation(NewConversationDTO conversationDTO) {
+        this.description = conversationDTO.description();
+        this.title = conversationDTO.title();
+        this.image = conversationDTO.image();
+    }
 }

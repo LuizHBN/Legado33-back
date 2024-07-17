@@ -1,6 +1,7 @@
 package br.com.legado33.app.category;
 
-import br.com.legado33.app.category.dto.CategoryService.ReadCategoryDTO;
+import br.com.legado33.app.category.dto.NewCategoryDTO;
+import br.com.legado33.app.category.dto.ReadCategoryDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,10 @@ public class Category {
 
     public Category(ReadCategoryDTO categoryDTO){
         this.id = categoryDTO.id();
+        this.title = categoryDTO.title();
+    }
+
+    public Category(NewCategoryDTO categoryDTO) {
         this.title = categoryDTO.title();
     }
 }

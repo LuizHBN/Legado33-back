@@ -1,5 +1,6 @@
 package br.com.legado33.app.campaign;
 
+import br.com.legado33.app.campaign.dto.NewCampaignDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,4 +24,9 @@ public class Campaign {
 
     @Column(name = "descricao", nullable = false, length = 1020)
     private String description;
+
+    public Campaign(NewCampaignDTO campaignDTO) {
+        this.title = campaignDTO.title();
+        this.description = campaignDTO.description();
+    }
 }

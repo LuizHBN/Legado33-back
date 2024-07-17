@@ -1,7 +1,7 @@
 package br.com.legado33.app.user.service;
 
 import br.com.legado33.app.access.Access;
-import br.com.legado33.app.access.AccessRepository;
+import br.com.legado33.app.access.repository.AccessRepository;
 import br.com.legado33.app.user.User;
 import br.com.legado33.app.user.dto.NewUserDTO;
 import br.com.legado33.app.user.dto.ReadUserDTO;

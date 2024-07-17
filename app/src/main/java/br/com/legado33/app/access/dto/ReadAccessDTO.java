@@ -1,6 +1,7 @@
 package br.com.legado33.app.access.dto;
 
 import br.com.legado33.app.access.Access;
+import br.com.legado33.app.conversation.Conversation;
 
 public record ReadAccessDTO(
         Long id,
@@ -28,5 +29,6 @@ public record ReadAccessDTO(
                 access.isCanEditNews(),
                 access.isCanEditFaq());
     }
+
 
 }

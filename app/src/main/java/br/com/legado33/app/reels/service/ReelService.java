@@ -1,8 +1,8 @@
 package br.com.legado33.app.reels.service;
 
 import br.com.legado33.app.category.Category;
-import br.com.legado33.app.category.dto.CategoryService.ReadCategoryDTO;
-import br.com.legado33.app.category.service.CategoryService.CategoryService;
+import br.com.legado33.app.category.dto.ReadCategoryDTO;
+import br.com.legado33.app.category.service.CategoryService;
 import br.com.legado33.app.reels.Reel;
 import br.com.legado33.app.reels.dto.NewReelDTO;
 import br.com.legado33.app.reels.dto.ReadReelDTO;
@@ -28,7 +28,7 @@ public class ReelService {
     }
 
     public ReadReelDTO saveNewReel(NewReelDTO reelDTO) {
-        ReadCategoryDTO categoryDTO = categoryService.findById(reelDTO.category());
+        ReadCategoryDTO categoryDTO = categoryService.findCategoryById(reelDTO.category());
         Category category = new Category(categoryDTO);
         Reel reel = new Reel(reelDTO, category);
         Reel savedReel = reelRepository.save(reel);
@@ -49,7 +49,7 @@ public class ReelService {
         Reel existingReel = reelRepository
                 .findById(id)
                 .orElseThrow(() -> new ReelNotFoundException(id));
-        existingReel = updateNotNullFieldFromDTO(reelDTO,existingReel);
+        updateReelFromDTO(reelDTO,existingReel);
 
         return new ReadReelDTO(reelRepository.save(existingReel));
     }
@@ -59,18 +59,22 @@ public class ReelService {
         reelRepository.deleteById(id);
     }
 
-    private Reel updateNotNullFieldFromDTO(UpdateReelDTO reelDTO, Reel reel ){
-        if (reelDTO.title() != null) {
+    private Reel updateReelFromDTO(UpdateReelDTO reelDTO, Reel reel) {
+        if (reelDTO.title() != null && !reelDTO.title().equals(reel.getTitle())) {
             reel.setTitle(reelDTO.title());
         }
-        if (reelDTO.description() != null) {
-           reel.setDescription(reelDTO.description());
+        if (reelDTO.description() != null && !reelDTO.description().equals(reel.getDescription())) {
+            reel.setDescription(reelDTO.description());
         }
         if (reelDTO.category() != null) {
-            ReadCategoryDTO categoryDTO = categoryService.findById(reelDTO.category());
+            //TODO -> Fazer verificação e tratamento de categoria não encontrada
+            ReadCategoryDTO categoryDTO = categoryService.findCategoryById(reelDTO.category());
             Category category = new Category(categoryDTO);
-            reel.setCategory(category);
+            if (!category.equals(reel.getCategory())) {
+                reel.setCategory(category);
+            }
         }
         return reel;
     }
+
 }

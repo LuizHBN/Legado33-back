@@ -1,4 +1,4 @@
-package br.com.legado33.app.category.dto.CategoryService;
+package br.com.legado33.app.category.dto;
 
 import br.com.legado33.app.category.Category;
 
