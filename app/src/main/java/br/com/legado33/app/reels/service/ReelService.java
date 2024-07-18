@@ -10,7 +10,6 @@ import br.com.legado33.app.reels.dto.UpdateReelDTO;
 import br.com.legado33.app.reels.exceptions.ReelNotFoundException;
 import br.com.legado33.app.reels.repository.ReelRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ public class ReelService {
     private final ReelRepository reelRepository;
     private final CategoryService categoryService;
 
-    @Autowired
     public ReelService(ReelRepository reelRepository, CategoryService categoryService) {
         this.reelRepository = reelRepository;
         this.categoryService = categoryService;

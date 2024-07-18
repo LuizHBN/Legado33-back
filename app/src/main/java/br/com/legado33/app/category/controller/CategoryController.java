@@ -5,7 +5,6 @@ import br.com.legado33.app.category.dto.UpdateCategoryDTO;
 import br.com.legado33.app.category.exceptions.CategoryNotFoundException;
 import br.com.legado33.app.category.service.CategoryService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    @Autowired
     public CategoryController(CategoryService categoryService){
         this.categoryService = categoryService;
     }

@@ -6,7 +6,6 @@ import br.com.legado33.app.category.dto.ReadCategoryDTO;
 import br.com.legado33.app.category.dto.UpdateCategoryDTO;
 import br.com.legado33.app.category.exceptions.CategoryNotFoundException;
 import br.com.legado33.app.category.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
-    @Autowired
     public CategoryService(CategoryRepository categoryRepository){
         this.categoryRepository = categoryRepository;
     }

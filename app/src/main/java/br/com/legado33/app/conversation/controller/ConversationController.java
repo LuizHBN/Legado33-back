@@ -7,7 +7,6 @@ import br.com.legado33.app.conversation.exceptions.ConversationNotFoundException
 import br.com.legado33.app.conversation.service.ConversationService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/conversas")
 public class ConversationController {
     private final ConversationService conversationService;
-    @Autowired
     public ConversationController(ConversationService service){
         this.conversationService = service;
     }

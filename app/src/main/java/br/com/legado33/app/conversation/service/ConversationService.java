@@ -6,7 +6,6 @@ import br.com.legado33.app.conversation.dto.ReadConversationDTO;
 import br.com.legado33.app.conversation.dto.UpdateConversationDTO;
 import br.com.legado33.app.conversation.exceptions.ConversationNotFoundException;
 import br.com.legado33.app.conversation.repository.ConversationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConversationService {
     private final ConversationRepository conversationRepository;
-    @Autowired
     public ConversationService(ConversationRepository conversationRepository){
         this.conversationRepository = conversationRepository;
     }

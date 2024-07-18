@@ -7,7 +7,6 @@ import br.com.legado33.app.user.dto.NewUserDTO;
 import br.com.legado33.app.user.dto.ReadUserDTO;
 import br.com.legado33.app.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final AccessRepository accessRepository;
 
-    @Autowired
     public UserService(UserRepository userRepository, AccessRepository accessRepository){
         this.accessRepository = accessRepository;
         this.userRepository = userRepository;

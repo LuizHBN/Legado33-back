@@ -6,7 +6,6 @@ import br.com.legado33.app.campaign.dto.UpdateCampaignDTO;
 import br.com.legado33.app.campaign.exceptions.CampaignNotFoundException;
 import br.com.legado33.app.campaign.service.CampaignService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class CampaignController {
 
     private final CampaignService campaignService;
-    @Autowired
     public CampaignController(CampaignService campaignService){
         this.campaignService = campaignService;
     }
