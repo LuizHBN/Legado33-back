@@ -1,6 +1,7 @@
 package br.com.legado33.app.conversation;
 
 import br.com.legado33.app.conversation.dto.NewConversationDTO;
+import br.com.legado33.app.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,18 +19,17 @@ public class Conversation {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "titulo", nullable = false, length = 255)
-    private String title;
+    @ManyToOne
+    @JoinColumn(name = "usuario_1", referencedColumnName = "id", nullable = false)
+    private User user_1;
 
-    @Column(name = "descricao", nullable = false, length = 1020)
-    private String description;
+    @ManyToOne
+    @JoinColumn(name = "usuario_2", referencedColumnName = "id", nullable = false)
+    private User user_2;
 
-    @Column(name = "imagem", length = 255)
-    private String image;
 
     public Conversation(NewConversationDTO conversationDTO) {
-        this.description = conversationDTO.description();
-        this.title = conversationDTO.title();
-        this.image = conversationDTO.image();
+        this.user_1 = conversationDTO.user_1();
+        this.user_2 = conversationDTO.user_2();
     }
 }

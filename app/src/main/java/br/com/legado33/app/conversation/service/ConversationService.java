@@ -12,7 +12,6 @@ import br.com.legado33.app.conversation.dto.ReadConversationDTO;
 import br.com.legado33.app.conversation.dto.UpdateConversationDTO;
 import br.com.legado33.app.conversation.exceptions.ConversationNotFoundException;
 import br.com.legado33.app.conversation.repository.ConversationRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,14 +51,11 @@ public class ConversationService {
     }
 
     public Conversation updateConversationFromDTO(UpdateConversationDTO conversationDTO,Conversation conversation) {
-        if (!conversationDTO.description().equals(conversation.getDescription())){
-            conversation.setDescription(conversationDTO.description());
+        if(!conversationDTO.user_1().equals(conversation.getUser_1())){
+            conversation.setUser_1(conversationDTO.user_1());
         }
-        if (!conversationDTO.title().equals(conversation.getTitle())){
-            conversation.setTitle(conversationDTO.title());
-        }
-        if (!conversationDTO.image().equals(conversation.getImage())){
-            conversation.setImage(conversationDTO.image());
+        if(!conversationDTO.user_2().equals(conversation.getUser_2())){
+            conversation.setUser_2(conversationDTO.user_2());
         }
         return conversation;
     }

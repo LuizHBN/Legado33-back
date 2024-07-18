@@ -1,6 +1,7 @@
 package br.com.legado33.app.message;
 
 import br.com.legado33.app.conversation.Conversation;
+import br.com.legado33.app.message.service.StatusConverter;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,7 +28,9 @@ public class Message {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
+    @Convert(converter = StatusConverter.class)
     private Status status;
+    //TODO -> Verificar funcionamento do converter
 
     public enum Status {
         SENT,

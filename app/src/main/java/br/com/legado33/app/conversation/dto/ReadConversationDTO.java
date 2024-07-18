@@ -1,20 +1,16 @@
 package br.com.legado33.app.conversation.dto;
 
 import br.com.legado33.app.conversation.Conversation;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import br.com.legado33.app.user.User;
 
 public record ReadConversationDTO(
-        @NotBlank
-        @NotNull
-        String title,
-        @NotBlank
-        @NotNull
-        String description,
-        @NotBlank
-        String image
+        Long id,
+
+        User user_1,
+
+        User user_2
 ) {
         public ReadConversationDTO(Conversation conversation){
-                this(conversation.getTitle(), conversation.getDescription(), conversation.getImage());
+                this(conversation.getId(),conversation.getUser_1(),conversation.getUser_2());
         }
 }
