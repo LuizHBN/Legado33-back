@@ -7,7 +7,6 @@ import br.com.legado33.app.access.dto.ReadAccessDTO;
 import br.com.legado33.app.access.service.AccessService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class AccessController {
 
     private final AccessService accessService;
-    @Autowired
+    
     public AccessController(AccessService service){
         this.accessService = service;
     }

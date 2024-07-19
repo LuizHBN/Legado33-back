@@ -6,7 +6,6 @@ import br.com.legado33.app.campaign.dto.NewCampaignDTO;
 import br.com.legado33.app.campaign.dto.ReadCampaignDTO;
 import br.com.legado33.app.campaign.dto.UpdateCampaignDTO;
 import br.com.legado33.app.campaign.exceptions.CampaignNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ public class CampaignService {
 
     private final CampaignRepository  campaignRepository;
 
-    @Autowired
     public CampaignService(CampaignRepository repository) {
         this.campaignRepository = repository;
 

@@ -5,7 +5,6 @@ import br.com.legado33.app.user.service.UserService;
 import br.com.legado33.app.user.dto.NewUserDTO;
 import br.com.legado33.app.user.dto.ReadUserDTO;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService){
         this.userService = userService;
     }

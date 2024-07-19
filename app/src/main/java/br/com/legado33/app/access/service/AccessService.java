@@ -6,7 +6,6 @@ import br.com.legado33.app.access.dto.ReadAccessDTO;
 import br.com.legado33.app.access.dto.UpdateAccessDTO;
 import br.com.legado33.app.access.exceptions.AccessNotFoundException;
 import br.com.legado33.app.access.repository.AccessRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccessService {
     private final AccessRepository accessRepository;
-    @Autowired
     public AccessService(AccessRepository repository){
         this.accessRepository = repository;
     }
