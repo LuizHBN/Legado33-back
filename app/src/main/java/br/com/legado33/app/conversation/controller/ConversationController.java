@@ -33,11 +33,7 @@ public class ConversationController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<ReadConversationDTO> getConversationById(@PathVariable Long id){
-        try {
             return ResponseEntity.ok(conversationService.findConversationById(id));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @PutMapping("/update/{id}")
@@ -45,21 +41,14 @@ public class ConversationController {
         if (conversationDTO == null){
             return ResponseEntity.notFound().build();
         }
-        try {
             return ResponseEntity.ok(conversationService.update(conversationDTO, id));
-        } catch (ConversationNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteConversation(@PathVariable Long id) {
-        try{
             conversationService.delete(id);
             return ResponseEntity.noContent().build();
-        } catch(ConversationNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
+
     }
 
 }

@@ -34,11 +34,7 @@ public class AccessController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<ReadAccessDTO> getAccessById(@PathVariable Long id){
-        try {
             return ResponseEntity.ok(accessService.findAccessById(id));
-        } catch (EntityNotFoundException e) {
-               return ResponseEntity.notFound().build();
-        }
     }
 
     @PutMapping("/update/{id}")
@@ -46,21 +42,14 @@ public class AccessController {
         if (accessDTO == null){
             return ResponseEntity.notFound().build();
         }
-        try {
             return ResponseEntity.ok(accessService.update(accessDTO, id));
-        } catch (AccessNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAccess(@PathVariable Long id) {
-        try{
             accessService.delete(id);
             return ResponseEntity.noContent().build();
-        } catch(AccessNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
     }
 
 }

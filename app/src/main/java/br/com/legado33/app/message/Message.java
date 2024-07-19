@@ -1,6 +1,7 @@
 package br.com.legado33.app.message;
 
 import br.com.legado33.app.conversation.Conversation;
+import br.com.legado33.app.message.dto.NewMessageDTO;
 import br.com.legado33.app.message.service.StatusConverter;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,7 +31,14 @@ public class Message {
     @Column(name = "status", nullable = false)
     @Convert(converter = StatusConverter.class)
     private Status status;
-    //TODO -> Verificar funcionamento do converter
+
+    public Message(NewMessageDTO messageDTO, Conversation conversation) {
+        this.conversation = conversation;
+        this.dateTime = messageDTO.dateTime();
+        this.status = messageDTO.status();
+    }
+
+    //TODO -> Check if converter is working well
 
     public enum Status {
         SENT,

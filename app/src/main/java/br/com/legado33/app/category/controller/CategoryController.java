@@ -32,11 +32,7 @@ public class CategoryController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<ReadCategoryDTO> getCategoryById(@PathVariable Long id){
-        try {
             return ResponseEntity.ok(categoryService.findCategoryById(id));
-        } catch (CategoryNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @PutMapping("/update/{id}")
@@ -44,20 +40,13 @@ public class CategoryController {
         if (categoryDTO == null){
             return ResponseEntity.notFound().build();
         }
-        try {
             return ResponseEntity.ok(categoryService.update(categoryDTO, id));
-        } catch (CategoryNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
-        try{
             categoryService.delete(id);
             return ResponseEntity.noContent().build();
-        } catch(CategoryNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
+
     }
 
 }

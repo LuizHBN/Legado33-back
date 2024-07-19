@@ -1,5 +1,6 @@
 package br.com.legado33.app.news;
 
+import br.com.legado33.app.news.dto.NewNewsDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,4 +26,10 @@ public class News {
 
     @Column(name = "imagem", length = 255)
     private String image;
+
+    public News(NewNewsDTO newsDTO) {
+        this.description = newsDTO.description();
+        this.image = newsDTO.image();
+        this.title = newsDTO.title();
+    }
 }

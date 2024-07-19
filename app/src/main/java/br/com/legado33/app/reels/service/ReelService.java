@@ -2,6 +2,7 @@ package br.com.legado33.app.reels.service;
 
 import br.com.legado33.app.category.Category;
 import br.com.legado33.app.category.dto.ReadCategoryDTO;
+import br.com.legado33.app.category.exceptions.CategoryNotFoundException;
 import br.com.legado33.app.category.service.CategoryService;
 import br.com.legado33.app.reels.Reel;
 import br.com.legado33.app.reels.dto.NewReelDTO;
@@ -28,11 +29,12 @@ public class ReelService {
     }
 
     public ReadReelDTO saveNewReel(NewReelDTO reelDTO) {
-        ReadCategoryDTO categoryDTO = categoryService.findCategoryById(reelDTO.category());
-        Category category = new Category(categoryDTO);
-        Reel reel = new Reel(reelDTO, category);
-        Reel savedReel = reelRepository.save(reel);
-        return new ReadReelDTO(savedReel);
+        //TODO -> Test sending a unreacheable category
+            ReadCategoryDTO categoryDTO = categoryService.findCategoryById(reelDTO.category());
+            Category category = new Category(categoryDTO);
+            Reel reel = new Reel(reelDTO, category);
+            Reel savedReel = reelRepository.save(reel);
+            return new ReadReelDTO(savedReel);
     }
 
     public Page<ReadReelDTO> getAllReels(Pageable page) {
@@ -42,7 +44,7 @@ public class ReelService {
     public ReadReelDTO findById(Long id) {
         return  reelRepository.findById(id)
                 .map(ReadReelDTO::new)
-                .orElseThrow(() -> new EntityNotFoundException("Reel not found with id: " + id));
+                .orElseThrow(() -> new ReelNotFoundException(id));
     }
 
     public ReadReelDTO update(UpdateReelDTO reelDTO, Long id) {

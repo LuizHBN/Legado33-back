@@ -33,11 +33,7 @@ public class CampaignController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<ReadCampaignDTO> getAccessById(@PathVariable Long id){
-        try {
             return ResponseEntity.ok(campaignService.findById(id));
-        } catch (CampaignNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @PutMapping("/update/{id}")
@@ -45,21 +41,13 @@ public class CampaignController {
         if (campaignDTO == null){
             return ResponseEntity.notFound().build();
         }
-        try {
             return ResponseEntity.ok(campaignService.update(campaignDTO, id));
-        } catch (CampaignNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCampaign(@PathVariable Long id) {
-        try{
             campaignService.delete(id);
             return ResponseEntity.noContent().build();
-        } catch(CampaignNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
     }
 
 }

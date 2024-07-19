@@ -2,15 +2,14 @@ package br.com.legado33.app.message.dto;
 
 import br.com.legado33.app.conversation.Conversation;
 import br.com.legado33.app.message.Message;
-import jakarta.validation.constraints.NotNull;
 
-public record NewMessageDTO(
-        @NotNull
+public record ReadMessageDTO(
         Conversation conversation,
-        @NotNull
         String dateTime,
-        @NotNull
         Message.Status status
 ) {
 
+    public ReadMessageDTO(Message message) {
+        this(message.getConversation(),message.getDateTime(),message.getStatus());
+    }
 }

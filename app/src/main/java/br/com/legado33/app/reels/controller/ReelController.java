@@ -1,5 +1,6 @@
 package br.com.legado33.app.reels.controller;
 
+import br.com.legado33.app.category.exceptions.CategoryNotFoundException;
 import br.com.legado33.app.reels.exceptions.ReelNotFoundException;
 import br.com.legado33.app.reels.service.ReelService;
 import br.com.legado33.app.reels.dto.NewReelDTO;
@@ -21,7 +22,7 @@ public class ReelController {
 
     @PostMapping("/save")
     public ResponseEntity<ReadReelDTO> createReel(@RequestBody @Valid NewReelDTO reelDTO) {
-        return ResponseEntity.ok(reelService.saveNewReel(reelDTO));
+            return ResponseEntity.ok(reelService.saveNewReel(reelDTO));
     }
 
     @GetMapping
@@ -31,11 +32,7 @@ public class ReelController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ReadReelDTO> getReelById(@PathVariable Long id) {
-        try{
             return  ResponseEntity.ok(reelService.findById(id));
-        }catch (EntityNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @PutMapping("/update/{id}")
@@ -43,20 +40,12 @@ public class ReelController {
         if (reelDTO == null){
             return ResponseEntity.notFound().build();
         }
-        try {
             return ResponseEntity.ok(reelService.update(reelDTO, id));
-        } catch (ReelNotFoundException e){
-           return ResponseEntity.notFound().build();
-        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReel(@PathVariable Long id) {
-        try{
             reelService.delete(id);
             return ResponseEntity.noContent().build();
-        } catch(ReelNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
     }
 }

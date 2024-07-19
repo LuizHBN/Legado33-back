@@ -1,6 +1,7 @@
 package br.com.legado33.app.conversation;
 
 import br.com.legado33.app.conversation.dto.NewConversationDTO;
+import br.com.legado33.app.conversation.dto.ReadConversationDTO;
 import br.com.legado33.app.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,6 +30,11 @@ public class Conversation {
 
 
     public Conversation(NewConversationDTO conversationDTO) {
+        this.user_1 = conversationDTO.user_1();
+        this.user_2 = conversationDTO.user_2();
+    }
+
+    public Conversation(ReadConversationDTO conversationDTO) {
         this.user_1 = conversationDTO.user_1();
         this.user_2 = conversationDTO.user_2();
     }

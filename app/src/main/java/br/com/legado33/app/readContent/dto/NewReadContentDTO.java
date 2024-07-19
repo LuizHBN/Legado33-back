@@ -1,5 +1,7 @@
 package br.com.legado33.app.readContent.dto;
 
+import br.com.legado33.app.worship.Worship;
+import br.com.legado33.app.worshipMaterial.WorshipMaterial;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -7,7 +9,7 @@ import jakarta.validation.constraints.Size;
 public record NewReadContentDTO(
     @NotNull
     @NotBlank
-    @Size(max = 255)
+  
     String book,
 
     @NotNull
@@ -22,10 +24,11 @@ public record NewReadContentDTO(
     @NotNull
     Integer finalVerse,
 
-    @Size(max = 1020)
+    @NotNull
+    @NotBlank
     String comment,
 
     @NotNull
-    Long worshipMaterialId
+    WorshipMaterial worshipMaterial
 ) {
 }
