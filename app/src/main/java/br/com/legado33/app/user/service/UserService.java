@@ -2,9 +2,12 @@ package br.com.legado33.app.user.service;
 
 import br.com.legado33.app.access.Access;
 import br.com.legado33.app.access.repository.AccessRepository;
+import br.com.legado33.app.reels.dto.ReadReelDTO;
+import br.com.legado33.app.reels.exceptions.ReelNotFoundException;
 import br.com.legado33.app.user.User;
 import br.com.legado33.app.user.dto.NewUserDTO;
 import br.com.legado33.app.user.dto.ReadUserDTO;
+import br.com.legado33.app.user.exceptions.UserNotFoundException;
 import br.com.legado33.app.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -29,8 +32,11 @@ public class UserService {
         userRepository.save(new User(userDTO));
     }
 
-    public User getUserById(Long id){
-        return userRepository.findById(id).orElseThrow(RuntimeException :: new);
+
+    public ReadUserDTO findUserById(Long id) {
+        return  userRepository.findById(id)
+                .map(ReadUserDTO::new)
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     public Page<ReadUserDTO> getAllUsers(Pageable page){

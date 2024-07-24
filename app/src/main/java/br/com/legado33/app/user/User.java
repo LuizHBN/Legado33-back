@@ -2,6 +2,7 @@ package br.com.legado33.app.user;
 
 import br.com.legado33.app.access.Access;
 import br.com.legado33.app.user.dto.NewUserDTO;
+import br.com.legado33.app.user.dto.ReadUserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,6 +35,12 @@ public class User {
         this.name = userDTO.name();
         this.mail = userDTO.mail();
         this.access = new Access();
-        this.access.setId(1L);
+    }
+
+    public User(ReadUserDTO userDTO) {
+        this.id = userDTO.id();
+        this.name = userDTO.name();
+        this.mail = userDTO.mail();
+        this.access = new Access();
     }
 }

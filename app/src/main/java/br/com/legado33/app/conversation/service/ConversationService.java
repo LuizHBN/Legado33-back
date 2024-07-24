@@ -7,6 +7,7 @@ import br.com.legado33.app.conversation.dto.UpdateConversationDTO;
 import br.com.legado33.app.conversation.exceptions.ConversationNotFoundException;
 import br.com.legado33.app.conversation.repository.ConversationRepository;
 import br.com.legado33.app.user.User;
+import br.com.legado33.app.user.dto.ReadUserDTO;
 import br.com.legado33.app.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,8 +29,12 @@ public class ConversationService {
     }
 
     public ReadConversationDTO saveNewConversation(NewConversationDTO conversationDTO){
-            User user_1 = userService.getUserById(conversationDTO.user_1().getId());
-            User user_2 = userService.getUserById(conversationDTO.user_2().getId());
+            ReadUserDTO userDTO_1 = userService.findUserById(conversationDTO.user_1().getId());
+            User user_1 = new User(userDTO_1);
+
+            ReadUserDTO userDTO_2 = userService.findUserById(conversationDTO.user_2().getId());
+            User user_2 = new User(userDTO_2);
+
 
             Conversation conversation = new Conversation(conversationDTO);
             conversation.setUser_1(user_1);

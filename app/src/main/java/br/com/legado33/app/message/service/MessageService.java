@@ -40,7 +40,7 @@ public class MessageService {
         return messageRepository.findAll(page).map(ReadMessageDTO::new);
     }
 
-    public ReadMessageDTO findById(Long id) {
+    public ReadMessageDTO findMessageById(Long id) {
         return messageRepository.findById(id)
                 .map(ReadMessageDTO::new)
                 .orElseThrow(() -> new MessageNotFoundException(id));

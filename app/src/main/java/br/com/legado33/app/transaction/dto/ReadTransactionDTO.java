@@ -5,7 +5,7 @@ import br.com.legado33.app.transaction.Transaction;
 import br.com.legado33.app.user.User;
 
 public record ReadTransactionDTO(Long id,
-                                 double value,
+                                 Double value,
                                  User user,
                                  Transaction.Type type,
                                  Campaign campaign) {

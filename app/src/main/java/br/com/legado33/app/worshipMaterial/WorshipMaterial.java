@@ -1,6 +1,8 @@
 package br.com.legado33.app.worshipMaterial;
 
 import br.com.legado33.app.worship.Worship;
+import br.com.legado33.app.worshipMaterial.dto.NewWorshipMaterialDTO;
+import br.com.legado33.app.worshipMaterial.dto.ReadWorshipMaterialDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,4 +32,18 @@ public class WorshipMaterial {
 
     @Column(name = "comentario", nullable = false, length = 1020)
     private String comment;
+
+    public WorshipMaterial(NewWorshipMaterialDTO worshipMaterialDTO, Worship worship) {
+        this.worship = worship;
+        this.description = worshipMaterialDTO.description();
+        this.media = worshipMaterialDTO.media();
+        this.comment = worshipMaterialDTO.comment();
+    }
+
+    public WorshipMaterial(ReadWorshipMaterialDTO worshipMaterialDTO) {
+        this.worship = worship;
+        this.description = worshipMaterialDTO.description();
+        this.media = worshipMaterialDTO.media();
+        this.comment = worshipMaterialDTO.comment();
+    }
 }

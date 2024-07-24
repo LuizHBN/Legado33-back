@@ -1,12 +1,9 @@
 package br.com.legado33.app.reels.controller;
 
-import br.com.legado33.app.category.exceptions.CategoryNotFoundException;
-import br.com.legado33.app.reels.exceptions.ReelNotFoundException;
 import br.com.legado33.app.reels.service.ReelService;
 import br.com.legado33.app.reels.dto.NewReelDTO;
 import br.com.legado33.app.reels.dto.ReadReelDTO;
 import br.com.legado33.app.reels.dto.UpdateReelDTO;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,7 +29,7 @@ public class ReelController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ReadReelDTO> getReelById(@PathVariable Long id) {
-            return  ResponseEntity.ok(reelService.findById(id));
+            return  ResponseEntity.ok(reelService.findReelById(id));
     }
 
     @PutMapping("/update/{id}")

@@ -5,7 +5,7 @@ import br.com.legado33.app.transaction.Transaction;
 import br.com.legado33.app.user.User;
 import jakarta.validation.constraints.NotNull;
 
-public record NewTransactionDTO (
+public record UpdateTransactionDTO(
         @NotNull
         Double value,
         @NotNull
@@ -14,5 +14,5 @@ public record NewTransactionDTO (
         Transaction.Type type,
         @NotNull
         Campaign campaign
-){
+) {
 }

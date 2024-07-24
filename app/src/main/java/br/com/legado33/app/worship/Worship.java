@@ -1,5 +1,7 @@
 package br.com.legado33.app.worship;
 
+import br.com.legado33.app.worship.dto.NewWorshipDTO;
+import br.com.legado33.app.worship.dto.ReadWorshipDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -29,4 +31,18 @@ public class Worship {
 
     @Column(name = "tema", nullable = false, length = 256)
     private String theme;
+
+    public Worship(NewWorshipDTO worshipDTO){
+        this.schedule = worshipDTO.schedule();
+        this.location = worshipDTO.location();
+        this.duration = worshipDTO.duration();
+        this.theme = worshipDTO.theme();
+    }
+
+    public Worship(ReadWorshipDTO worshipDTO) {
+        this.schedule = worshipDTO.schedule();
+        this.location = worshipDTO.location();
+        this.duration = worshipDTO.duration();
+        this.theme = worshipDTO.theme();
+    }
 }

@@ -13,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "Transacao", schema = "legado33_mysql")
+@Table(name = "transacao", schema = "legado33_mysql")
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +34,14 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "idCampanha", referencedColumnName = "id")
     private Campaign campaign;
+
+    public Transaction(NewTransactionDTO transactionDTO, User user, Campaign campaign) {
+        this.value = transactionDTO.value();
+        this.type = transactionDTO.type();
+
+        this.user = user;
+        this.campaign = campaign;
+    }
 
     public enum Type {
         OFERTA,

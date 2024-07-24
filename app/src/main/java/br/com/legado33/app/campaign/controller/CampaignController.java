@@ -3,7 +3,6 @@ package br.com.legado33.app.campaign.controller;
 import br.com.legado33.app.campaign.dto.NewCampaignDTO;
 import br.com.legado33.app.campaign.dto.ReadCampaignDTO;
 import br.com.legado33.app.campaign.dto.UpdateCampaignDTO;
-import br.com.legado33.app.campaign.exceptions.CampaignNotFoundException;
 import br.com.legado33.app.campaign.service.CampaignService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -31,7 +30,7 @@ public class CampaignController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<ReadCampaignDTO> getAccessById(@PathVariable Long id){
-            return ResponseEntity.ok(campaignService.findById(id));
+            return ResponseEntity.ok(campaignService.findCampaignById(id));
     }
 
     @PutMapping("/update/{id}")

@@ -3,7 +3,6 @@ package br.com.legado33.app.message.controller;
 import br.com.legado33.app.message.dto.NewMessageDTO;
 import br.com.legado33.app.message.dto.ReadMessageDTO;
 import br.com.legado33.app.message.service.MessageService;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,7 +29,7 @@ public class MessageController {
     @GetMapping("/{id}")
     public ResponseEntity<ReadMessageDTO> getMessageById(@PathVariable Long id) {
 
-            return ResponseEntity.ok(reelService.findById(id));
+            return ResponseEntity.ok(reelService.findMessageById(id));
 
     }
 

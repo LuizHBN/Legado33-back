@@ -1,5 +1,6 @@
 package br.com.legado33.app.readContent;
 
+import br.com.legado33.app.readContent.dto.NewReadContentDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import br.com.legado33.app.worshipMaterial.WorshipMaterial;
@@ -39,4 +40,14 @@ public class ReadContent {
 
     @Column(name = "comentario", length = 1020)
     private String comment;
+
+    public ReadContent(NewReadContentDTO readContentDTO, WorshipMaterial worshipMaterial) {
+        this.worshipMaterial = worshipMaterial;
+        this.book = readContentDTO.book();
+        this.initialChapter = readContentDTO.initialChapter();
+        this.finalChapter = readContentDTO.finalChapter();
+        this.initialVerse = readContentDTO.initialVerse();
+        this.finalVerse = readContentDTO.finalVerse();
+        this.comment = readContentDTO.comment();
+    }
 }
