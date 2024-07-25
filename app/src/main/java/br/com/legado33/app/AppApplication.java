@@ -11,5 +11,6 @@ public class AppApplication {
 	}
 
 	//TODO -> Construir global exception Handler, verificar funcionamento da api de updates, verificar consistência de nomenclatura de endpoints;
+	//TODO -> Verificar se os métodos FindById irão continuar retornando reads
 }
 

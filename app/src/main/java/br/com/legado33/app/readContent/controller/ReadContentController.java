@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/readContents")
+@RequestMapping("/material_leitura")
 @RequiredArgsConstructor
 public class ReadContentController {
     private final ReadContentService readContentService;

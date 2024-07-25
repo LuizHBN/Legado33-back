@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/conversas")
+@RequestMapping("/conversa")
 public class ConversationController {
     private final ConversationService conversationService;
     public ConversationController(ConversationService service){
