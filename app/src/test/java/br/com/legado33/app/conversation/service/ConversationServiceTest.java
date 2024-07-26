@@ -1,5 +1,6 @@
 package br.com.legado33.app.conversation.service;
 
+import br.com.legado33.app.domain.conversation.service.ConversationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -8,13 +9,13 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
-import br.com.legado33.app.conversation.Conversation;
-import br.com.legado33.app.conversation.dto.NewConversationDTO;
-import br.com.legado33.app.conversation.dto.UpdateConversationDTO;
-import br.com.legado33.app.conversation.exceptions.ConversationNotFoundException;
-import br.com.legado33.app.conversation.repository.ConversationRepository;
-import br.com.legado33.app.user.User;
-import br.com.legado33.app.user.dto.NewUserDTO;
+import br.com.legado33.app.domain.conversation.Conversation;
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewConversationDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateConversationDTO;
+import br.com.legado33.app.domain.conversation.exception.ConversationNotFoundException;
+import br.com.legado33.app.domain.conversation.repository.ConversationRepository;
+import br.com.legado33.app.domain.user.User;
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewUserDTO;
 
 import java.util.Collections;
 import java.util.Optional;

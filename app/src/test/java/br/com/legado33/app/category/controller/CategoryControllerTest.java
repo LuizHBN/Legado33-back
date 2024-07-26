@@ -1,5 +1,6 @@
 package br.com.legado33.app.category.controller;
 
+import br.com.legado33.app.api.controller.CategoryController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -11,10 +12,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import br.com.legado33.app.category.dto.NewCategoryDTO;
-import br.com.legado33.app.category.dto.ReadCategoryDTO;
-import br.com.legado33.app.category.dto.UpdateCategoryDTO;
-import br.com.legado33.app.category.service.CategoryService;
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewCategoryDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadCategoryDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateCategoryDTO;
+import br.com.legado33.app.domain.category.service.CategoryService;
 
 import java.util.Collections;
 
