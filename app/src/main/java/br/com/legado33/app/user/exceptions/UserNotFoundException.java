@@ -1,6 +1,8 @@
 package br.com.legado33.app.user.exceptions;
 
-public class UserNotFoundException extends RuntimeException {
+import br.com.legado33.app.exceptions.NotFoundException;
+
+public class UserNotFoundException extends NotFoundException {
     public UserNotFoundException(Long id){
         super("User not found with id " + id);
     }

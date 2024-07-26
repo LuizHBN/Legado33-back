@@ -1,6 +1,8 @@
 package br.com.legado33.app.access.exceptions;
 
-public class AccessNotFoundException extends RuntimeException {
+import br.com.legado33.app.exceptions.NotFoundException;
+
+public class AccessNotFoundException extends NotFoundException {
         public AccessNotFoundException(Long id) {
             super("Access not found with id " + id);
         }

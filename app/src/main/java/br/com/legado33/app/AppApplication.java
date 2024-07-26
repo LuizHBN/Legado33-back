@@ -10,7 +10,7 @@ public class AppApplication {
 		SpringApplication.run(AppApplication.class, args);
 	}
 
-	//TODO -> Construir global exception Handler, verificar funcionamento da api de updates, verificar consistência de nomenclatura de endpoints;
+	//TODO -> Construir global exception Handler, verificar consistência de nomenclatura de endpoints;
 	//TODO -> Verificar se os métodos FindById irão continuar retornando reads
 }
 
