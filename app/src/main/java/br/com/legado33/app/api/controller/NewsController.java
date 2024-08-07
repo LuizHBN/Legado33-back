@@ -1,23 +1,31 @@
 package br.com.legado33.app.api.controller;
 
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewNewsDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadNewsDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateNewsDTO;
-import br.com.legado33.app.domain.news.exception.NewsNotFoundException;
-import br.com.legado33.app.domain.news.service.NewsService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewNewsDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateNewsDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadNewsDTO;
+import br.com.legado33.app.domain.news.exception.NewsNotFoundException;
+import br.com.legado33.app.domain.news.service.NewsService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/novidade")
 public class NewsController {
 
     private final NewsService newsService;
-    @Autowired
+
     public NewsController(NewsService newsService){
         this.newsService = newsService;
     }
@@ -28,8 +36,9 @@ public class NewsController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ReadNewsDTO>> getAllCategories(Pageable page){
-        return ResponseEntity.ok(newsService.getAllCategories(page));
+    public ResponseEntity<Page<ReadNewsDTO>> getAllCategories(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="7") int size){
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        return ResponseEntity.ok(newsService.getAllCategories(pageable));
     }
     @GetMapping("/{id}")
     public ResponseEntity<ReadNewsDTO> getNewsById(@PathVariable Long id){

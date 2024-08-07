@@ -1,17 +1,26 @@
 package br.com.legado33.app.api.controller;
 
-import br.com.legado33.app.domain.category.exception.CategoryNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.legado33.app.api.controller.dto.request.newDTO.NewReadContentDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadReadContentDTO;
 import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateReadContentDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadReadContentDTO;
+import br.com.legado33.app.domain.category.exception.CategoryNotFoundException;
 import br.com.legado33.app.domain.readContent.exception.ReadContentNotFoundException;
 import br.com.legado33.app.domain.readContent.service.ReadContentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/material_leitura")
@@ -29,8 +38,9 @@ public class ReadContentController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ReadReadContentDTO>> getAllReadContents(Pageable page) {
-        return ResponseEntity.ok(readContentService.getAllReadContents(page));
+    public ResponseEntity<Page<ReadReadContentDTO>> getAllReadContents(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="7") int size) {
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        return ResponseEntity.ok(readContentService.getAllReadContents(pageable));
     }
 
     @GetMapping("/{id}")

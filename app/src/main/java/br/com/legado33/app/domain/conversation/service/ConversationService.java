@@ -1,24 +1,23 @@
 package br.com.legado33.app.domain.conversation.service;
 
-import br.com.legado33.app.domain.conversation.exception.ConversationNotFoundException;
-import br.com.legado33.app.domain.conversation.Conversation;
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewConversationDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadConversationDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateConversationDTO;
-import br.com.legado33.app.domain.conversation.repository.ConversationRepository;
-import br.com.legado33.app.domain.user.User;
-import br.com.legado33.app.api.controller.dto.response.ReadUserDTO;
-import br.com.legado33.app.domain.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewConversationDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateConversationDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadConversationDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadUserDTO;
+import br.com.legado33.app.domain.conversation.Conversation;
+import br.com.legado33.app.domain.conversation.exception.ConversationNotFoundException;
+import br.com.legado33.app.domain.conversation.repository.ConversationRepository;
+import br.com.legado33.app.domain.user.User;
+import br.com.legado33.app.domain.user.service.UserService;
 
 @Service
 public class ConversationService {
     private final ConversationRepository conversationRepository;
     private final UserService userService;
-    @Autowired
     public ConversationService(ConversationRepository conversationRepository, UserService userService){
         this.conversationRepository = conversationRepository;
         this.userService = userService;
