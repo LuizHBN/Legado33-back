@@ -51,6 +51,12 @@ public class TransactionService {
                 .map(ReadTransactionDTO::new)
                 .orElseThrow(() -> new TransactionNotFoundException(id));
     }
+    
+    public ReadTransactionDTO FindTransactionByUser(Long userId) {
+        return  transactionRepository.findByUserId(userId)
+                .map(ReadTransactionDTO::new)
+                .orElseThrow(() -> new TransactionNotFoundException(userId));
+    }
 
     public ReadTransactionDTO update(UpdateTransactionDTO transactionDTO, Long id) {
         Transaction existingTransaction = transactionRepository
