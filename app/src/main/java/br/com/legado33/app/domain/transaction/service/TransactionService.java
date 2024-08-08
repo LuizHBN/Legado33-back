@@ -1,20 +1,21 @@
 package br.com.legado33.app.domain.transaction.service;
 
-import br.com.legado33.app.domain.campaign.Campaign;
-import br.com.legado33.app.domain.transaction.exception.TransactionNotFoundException;
-import br.com.legado33.app.domain.transaction.repository.TransactionRepository;
-import br.com.legado33.app.domain.user.service.UserService;
-import br.com.legado33.app.api.controller.dto.response.ReadCampaignDTO;
-import br.com.legado33.app.domain.campaign.service.CampaignService;
-import br.com.legado33.app.domain.transaction.Transaction;
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewTransactionDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadTransactionDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateTransactionDTO;
-import br.com.legado33.app.domain.user.User;
-import br.com.legado33.app.api.controller.dto.response.ReadUserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewTransactionDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateTransactionDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadCampaignDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadTransactionDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadUserDTO;
+import br.com.legado33.app.domain.campaign.Campaign;
+import br.com.legado33.app.domain.campaign.service.CampaignService;
+import br.com.legado33.app.domain.transaction.Transaction;
+import br.com.legado33.app.domain.transaction.exception.TransactionNotFoundException;
+import br.com.legado33.app.domain.transaction.repository.TransactionRepository;
+import br.com.legado33.app.domain.user.User;
+import br.com.legado33.app.domain.user.service.UserService;
 
 @Service
 public class TransactionService {
@@ -46,13 +47,13 @@ public class TransactionService {
         return transactionRepository.findAll(page).map(ReadTransactionDTO :: new);
     }
 
-    public ReadTransactionDTO FindTransactionById(Long id) {
+    public ReadTransactionDTO findTransactionById(Long id) {
         return  transactionRepository.findById(id)
                 .map(ReadTransactionDTO::new)
                 .orElseThrow(() -> new TransactionNotFoundException(id));
     }
     
-    public ReadTransactionDTO FindTransactionByUser(Long userId) {
+    public ReadTransactionDTO findTransactionByUser(Long userId) {
         return  transactionRepository.findByUserId(userId)
                 .map(ReadTransactionDTO::new)
                 .orElseThrow(() -> new TransactionNotFoundException(userId));
