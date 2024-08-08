@@ -1,5 +1,7 @@
 package br.com.legado33.app.domain.transaction.service;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -44,26 +46,25 @@ public class TransactionService {
     }
 
     public Page<ReadTransactionDTO> getAllTransactions(Pageable page) {
-        return transactionRepository.findAll(page).map(ReadTransactionDTO :: new);
+        return transactionRepository.findAll(page).map(ReadTransactionDTO::new);
     }
 
     public ReadTransactionDTO findTransactionById(Long id) {
-        return  transactionRepository.findById(id)
+        return transactionRepository.findById(id)
                 .map(ReadTransactionDTO::new)
                 .orElseThrow(() -> new TransactionNotFoundException(id));
     }
-    
-    public ReadTransactionDTO findTransactionByUser(Long userId) {
-        return  transactionRepository.findByUserId(userId)
-                .map(ReadTransactionDTO::new)
-                .orElseThrow(() -> new TransactionNotFoundException(userId));
+
+    public Page<Optional<ReadTransactionDTO>> findTransactionByUser(Long userId) {
+        return transactionRepository.findByUserId(userId)
+                .map(transactionOpt -> transactionOpt.map(ReadTransactionDTO::new));
     }
 
     public ReadTransactionDTO update(UpdateTransactionDTO transactionDTO, Long id) {
         Transaction existingTransaction = transactionRepository
                 .findById(id)
                 .orElseThrow(() -> new TransactionNotFoundException(id));
-        updateTransactionFromDTO(transactionDTO,existingTransaction);
+        updateTransactionFromDTO(transactionDTO, existingTransaction);
 
         return new ReadTransactionDTO(transactionRepository.save(existingTransaction));
     }
@@ -73,7 +74,7 @@ public class TransactionService {
         transactionRepository.deleteById(id);
     }
 
-    private Transaction updateTransactionFromDTO(UpdateTransactionDTO transactionDTO,Transaction transaction ) {
+    private Transaction updateTransactionFromDTO(UpdateTransactionDTO transactionDTO, Transaction transaction) {
         if (!transactionDTO.value().equals(transaction.getValue())) {
             transaction.setValue(transactionDTO.value());
         }
