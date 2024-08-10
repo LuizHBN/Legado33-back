@@ -43,7 +43,7 @@ public class Transaction {
     private User user;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "Tipo", nullable = false)
+    @Column(name = "tipo", nullable = false)
     private Type type;
 
     @ManyToOne
