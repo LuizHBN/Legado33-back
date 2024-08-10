@@ -1,17 +1,18 @@
 package br.com.legado33.app.domain.user.service;
 
-import br.com.legado33.app.domain.access.Access;
-import br.com.legado33.app.domain.access.service.AccessService;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateUserAccessDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateUserDTO;
-import br.com.legado33.app.domain.user.User;
-import br.com.legado33.app.domain.user.exception.UserNotFoundException;
-import br.com.legado33.app.domain.user.repository.UserRepository;
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewUserDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadUserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewUserDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateUserAccessDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateUserDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadUserDTO;
+import br.com.legado33.app.domain.access.Access;
+import br.com.legado33.app.domain.access.service.AccessService;
+import br.com.legado33.app.domain.user.User;
+import br.com.legado33.app.domain.user.exception.UserNotFoundException;
+import br.com.legado33.app.domain.user.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -66,9 +67,9 @@ public class UserService {
         return user;
     }
     public User updateUserAccessFromDTO(UpdateUserAccessDTO userDTO, User user) {
-        if(!userDTO.access().equals(user.getAccess())){
+        if(!userDTO.access().equals(user.getAccessId())){
             Access access = new Access(accessService.findAccessById(userDTO.access().getId()));
-            user.setAccess(access);
+            user.setAccessId(access);
         }
         return user;
     }

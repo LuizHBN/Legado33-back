@@ -24,42 +24,46 @@ import jakarta.validation.Valid;
 public class AccessController {
 
     private final AccessService accessService;
-    
-    public AccessController(AccessService service){
+
+    public AccessController(AccessService service) {
         this.accessService = service;
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ReadAccessDTO> createAccess(@RequestBody @Valid NewAccessDTO accessDTO){
+    public ResponseEntity<ReadAccessDTO> createAccess(@RequestBody @Valid NewAccessDTO accessDTO) {
         return ResponseEntity.ok(accessService.saveNewAccess(accessDTO));
     }
 
     @GetMapping
-    public ResponseEntity<Page<ReadAccessDTO>> getAllAccess(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="7") int size){
+    public ResponseEntity<Page<ReadAccessDTO>> getAllAccess(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "7") int size,
+            @RequestParam(required = false) Long userId) {
         Pageable pageable = Pageable.ofSize(size).withPage(page);
-        return ResponseEntity.ok(accessService.getAllAccesses(pageable));
+        if (userId != null) {
+            return ResponseEntity.ok(accessService.getAllAccessesByUserId(userId, pageable));
+        } else {
+            return ResponseEntity.ok(accessService.getAllAccesses(pageable));
+        }
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ReadAccessDTO> getAccessById(@PathVariable Long id){
-            return ResponseEntity.ok(accessService.findAccessById(id));
+    public ResponseEntity<ReadAccessDTO> getAccessById(@PathVariable Long id) {
+        return ResponseEntity.ok(accessService.findAccessById(id));
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<ReadAccessDTO> updateAccess(@PathVariable Long id, @Valid @RequestBody UpdateAccessDTO accessDTO) {
-        if (accessDTO == null){
+        if (accessDTO == null) {
             return ResponseEntity.notFound().build();
         }
-            return ResponseEntity.ok(accessService.update(accessDTO, id));
+        return ResponseEntity.ok(accessService.update(accessDTO, id));
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAccess(@PathVariable Long id) {
-            accessService.delete(id);
-            return ResponseEntity.noContent().build();
+        accessService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
-
-
-

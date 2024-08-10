@@ -1,33 +1,44 @@
 package br.com.legado33.app.domain.access.service;
 
-import br.com.legado33.app.domain.access.Access;
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewAccessDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadAccessDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateAccessDTO;
-import br.com.legado33.app.domain.access.exception.AccessNotFoundException;
-import br.com.legado33.app.domain.access.repository.AccessRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewAccessDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateAccessDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadAccessDTO;
+import br.com.legado33.app.domain.access.Access;
+import br.com.legado33.app.domain.access.exception.AccessNotFoundException;
+import br.com.legado33.app.domain.access.repository.AccessRepository;
+import br.com.legado33.app.domain.user.repository.UserRepository;
+
 @Service
 public class AccessService {
+
     private final AccessRepository accessRepository;
-    public AccessService(AccessRepository repository){
-        this.accessRepository = repository;
+    private final UserRepository userRepository;
+
+    public AccessService(AccessRepository accessRepository, UserRepository userRepository) {
+        this.accessRepository = accessRepository;
+        this.userRepository = userRepository;
     }
 
-    public Page<ReadAccessDTO> getAllAccesses(Pageable page){
-        return accessRepository.findAll(page).map(ReadAccessDTO :: new);
+    public Page<ReadAccessDTO> getAllAccesses(Pageable page) {
+        return accessRepository.findAll(page).map(ReadAccessDTO::new);
     }
 
-    public ReadAccessDTO saveNewAccess(NewAccessDTO accessDTO){
+    public Page<ReadAccessDTO> getAllAccessesByUserId(Long userId, Pageable pageable) {
+        return userRepository.findDistinctAccessByUserId(userId, pageable)
+                .map(ReadAccessDTO::new);
+    }
+
+    public ReadAccessDTO saveNewAccess(NewAccessDTO accessDTO) {
         Access access = new Access(accessDTO);
         Access savedAccess = accessRepository.save(access);
         return new ReadAccessDTO(savedAccess);
     }
 
-    public ReadAccessDTO findAccessById(Long id){
+    public ReadAccessDTO findAccessById(Long id) {
         return accessRepository.findById(id)
                 .map(ReadAccessDTO::new)
                 .orElseThrow(() -> new AccessNotFoundException(id));
@@ -42,10 +53,7 @@ public class AccessService {
         return new ReadAccessDTO(accessRepository.save(existingAccess));
     }
 
-    public Access updateAccessFromDTO(UpdateAccessDTO accessDTO,Access access) {
-        if (accessDTO.description() != null) {
-            access.setDescription(accessDTO.description());
-        }
+    public Access updateAccessFromDTO(UpdateAccessDTO accessDTO, Access access) {
         if (accessDTO.canEditWorship() != access.isCanEditWorship()) {
             access.setCanEditWorship(accessDTO.canEditWorship());
         }
