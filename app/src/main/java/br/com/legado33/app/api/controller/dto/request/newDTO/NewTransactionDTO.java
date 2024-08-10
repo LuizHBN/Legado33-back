@@ -12,7 +12,6 @@ public record NewTransactionDTO (
         User user,
         @NotNull
         Transaction.Type type,
-        @NotNull
         Campaign campaign
 ){
 }

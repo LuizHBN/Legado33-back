@@ -1,7 +1,5 @@
 package br.com.legado33.app.domain.transaction.service;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -30,21 +28,22 @@ public class TransactionService {
         this.transactionRepository = transactionRepository;
         this.userService = userService;
         this.campaignService = campaign;
-
     }
 
     public ReadTransactionDTO saveNewTransaction(NewTransactionDTO transactionDTO) {
         ReadUserDTO userDTO = userService.findUserById(transactionDTO.user().getId());
         User user = new User(userDTO);
-
-        ReadCampaignDTO campaignDTO = campaignService.findCampaignById(transactionDTO.campaign().getId());
-        Campaign campaign = new Campaign(campaignDTO);
-
+        
+        Campaign campaign = null;
+        if (transactionDTO.campaign() != null) {
+            ReadCampaignDTO campaignDTO = campaignService.findCampaignById(transactionDTO.campaign().getId());
+            campaign = new Campaign(campaignDTO);
+        }
+    
         Transaction transaction = new Transaction(transactionDTO, user, campaign);
         Transaction savedTransaction = transactionRepository.save(transaction);
         return new ReadTransactionDTO(savedTransaction);
     }
-
     public Page<ReadTransactionDTO> getAllTransactions(Pageable page) {
         return transactionRepository.findAll(page).map(ReadTransactionDTO::new);
     }
@@ -55,9 +54,8 @@ public class TransactionService {
                 .orElseThrow(() -> new TransactionNotFoundException(id));
     }
 
-    public Page<Optional<ReadTransactionDTO>> findTransactionByUser(Long userId) {
-        return transactionRepository.findByUserId(userId)
-                .map(transactionOpt -> transactionOpt.map(ReadTransactionDTO::new));
+    public Page<ReadTransactionDTO> getAllTransactionsByUserId(Long userId, Pageable pageable) {
+        return transactionRepository.getAllTransactionsByUserId(userId, pageable).map(ReadTransactionDTO::new);
     }
 
     public ReadTransactionDTO update(UpdateTransactionDTO transactionDTO, Long id) {

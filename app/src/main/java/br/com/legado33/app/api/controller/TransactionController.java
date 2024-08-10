@@ -24,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/transacao")
 @RequiredArgsConstructor
 public class TransactionController {
+
     private final TransactionService transactionService;
 
     @PostMapping("/save")
@@ -32,19 +33,26 @@ public class TransactionController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ReadTransactionDTO>> getAllTransactions(@RequestParam(defaultValue="0") int page, @RequestParam(defaultValue="7") int size) {
+    public ResponseEntity<Page<ReadTransactionDTO>> getAllTransactions(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "7") int size,
+            @RequestParam(required = false) Long userId) {
         Pageable pageable = Pageable.ofSize(size).withPage(page);
-        return ResponseEntity.ok(transactionService.getAllTransactions(pageable));
+        if (userId != null) {
+            return ResponseEntity.ok(transactionService.getAllTransactionsByUserId(userId, pageable));
+        } else {
+            return ResponseEntity.ok(transactionService.getAllTransactions(pageable));
+        }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ReadTransactionDTO> getTransactionById(@PathVariable Long id) {
-        return  ResponseEntity.ok(transactionService.FindTransactionById(id));
+        return ResponseEntity.ok(transactionService.findTransactionById(id));
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<ReadTransactionDTO> updateTransaction(@PathVariable Long id, @Valid @RequestBody UpdateTransactionDTO transactionDTO) {
-        if (transactionDTO == null){
+        if (transactionDTO == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(transactionService.update(transactionDTO, id));
