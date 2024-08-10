@@ -2,8 +2,18 @@ package br.com.legado33.app.domain.access;
 
 import br.com.legado33.app.api.controller.dto.request.newDTO.NewAccessDTO;
 import br.com.legado33.app.api.controller.dto.response.ReadAccessDTO;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 //Teste Commit Gustavo
 
