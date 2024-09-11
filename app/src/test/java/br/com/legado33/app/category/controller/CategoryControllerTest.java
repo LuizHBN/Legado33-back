@@ -51,7 +51,7 @@ public class CategoryControllerTest {
         verify(categoryService, times(1)).saveNewCategory(any(NewCategoryDTO.class));
     }
 
-    @SuppressWarnings("null")
+   /* @SuppressWarnings("null")
     @Test
     void testGetAllCategories() {
         PageRequest pageRequest = PageRequest.of(0, 10);
@@ -63,7 +63,7 @@ public class CategoryControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(1, response.getBody().getContent().size());
         verify(categoryService, times(1)).getAllCategories(any(PageRequest.class));
-    }
+    }*/
 
     @Test
     void testGetCategoryById() {

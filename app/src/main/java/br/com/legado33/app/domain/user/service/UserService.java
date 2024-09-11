@@ -67,9 +67,9 @@ public class UserService {
         return user;
     }
     public User updateUserAccessFromDTO(UpdateUserAccessDTO userDTO, User user) {
-        if(!userDTO.access().equals(user.getAccessId())){
+        if(!userDTO.access().equals(user.getAccess())){
             Access access = new Access(accessService.findAccessById(userDTO.access().getId()));
-            user.setAccessId(access);
+            user.setAccess(access);
         }
         return user;
     }
