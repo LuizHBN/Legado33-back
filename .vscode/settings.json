@@ -1,5 +1,9 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.debug.settings.onBuildFailureProceed": true,
+    "inference.model": "codellama:34b-code-q6_K",
+    "inference.custom.format": "codellama",
+    "inference.maxLines": 116,
+    "inference.maxTokens": 1256
 }
