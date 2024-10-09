@@ -28,8 +28,7 @@ public class MessageService {
 
     public ReadMessageDTO saveNewMessage(NewMessageDTO messageDTO) {
         //TODO -> Test sending a unreacheable conversation
-        ReadConversationDTO conversationDTO = conversationService.findConversationById(messageDTO.conversation().getId());
-        Conversation conversation = new Conversation(conversationDTO);
+        Conversation conversation = conversationService.findConversationById(messageDTO.conversation().getId());
 
         Message message = new Message(messageDTO, conversation);
         Message savedMessage = messageRepository.save(message);

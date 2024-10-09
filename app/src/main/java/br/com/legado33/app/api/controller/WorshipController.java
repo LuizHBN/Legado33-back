@@ -41,7 +41,7 @@ public class WorshipController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<ReadWorshipDTO> getWorshipById(@PathVariable Long id){
-        return ResponseEntity.ok(worshipService.findWorshipById(id));
+        return ResponseEntity.ok(worshipService.findReadWorshipDTOById(id));
     }
 
     @PutMapping("/update/{id}")

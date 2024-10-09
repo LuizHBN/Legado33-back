@@ -27,8 +27,8 @@ public class ReadContentService {
     }
 
     public ReadReadContentDTO saveNewReadContent(NewReadContentDTO readContentDTO) {
-        ReadWorshipMaterialDTO worshipMaterialDTO = worshipMaterialService.findWorshipMaterialById(readContentDTO.worshipMaterial().getId());
-        WorshipMaterial worshipMaterial = new WorshipMaterial(worshipMaterialDTO);
+        ReadWorshipMaterialDTO worshipMaterialDTO = worshipMaterialService.findReadWorshipMaterialDTOById(readContentDTO.worshipMaterial().getId());
+        WorshipMaterial worshipMaterial = worshipMaterialService.findWorshipMaterialById(readContentDTO.worshipMaterial().getId());
         ReadContent readContent = new ReadContent(readContentDTO, worshipMaterial);
         ReadContent savedReadContent = readContentRepository.save(readContent);
         return new ReadReadContentDTO(savedReadContent);
@@ -78,7 +78,7 @@ public class ReadContentService {
             readContent.setComment(readContentDTO.comment());
         }
         if (!readContentDTO.worshipMaterial().equals(readContent.getWorshipMaterial())) {
-            ReadWorshipMaterialDTO worshipMaterialDTO = worshipMaterialService.findWorshipMaterialById(readContentDTO.worshipMaterial().getId());
+            ReadWorshipMaterialDTO worshipMaterialDTO = worshipMaterialService.findReadWorshipMaterialDTOById(readContentDTO.worshipMaterial().getId());
             WorshipMaterial worshipMaterial = new WorshipMaterial(worshipMaterialDTO);
 
             readContent.setWorshipMaterial(worshipMaterial);

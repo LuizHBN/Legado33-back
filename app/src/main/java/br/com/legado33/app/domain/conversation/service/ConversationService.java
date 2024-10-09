@@ -28,12 +28,8 @@ public class ConversationService {
     }
 
     public ReadConversationDTO saveNewConversation(NewConversationDTO conversationDTO){
-            ReadUserDTO userDTO_1 = userService.findUserById(conversationDTO.user_1().getId());
-            User user_1 = new User(userDTO_1);
-
-            ReadUserDTO userDTO_2 = userService.findUserById(conversationDTO.user_2().getId());
-            User user_2 = new User(userDTO_2);
-
+            User user_1 = userService.findUserById(conversationDTO.user_1().getId());
+            User user_2 = userService.findUserById(conversationDTO.user_2().getId());
 
             Conversation conversation = new Conversation(conversationDTO);
             conversation.setUser_1(user_1);
@@ -44,9 +40,14 @@ public class ConversationService {
 
     }
 
-    public ReadConversationDTO findConversationById(Long id){
+    public ReadConversationDTO findReadConversationDTOById(Long id){
         return conversationRepository.findById(id)
                 .map(ReadConversationDTO::new)
+                .orElseThrow(() -> new ConversationNotFoundException(id));
+    }
+
+    public Conversation findConversationById(Long id){
+        return conversationRepository.findById(id)
                 .orElseThrow(() -> new ConversationNotFoundException(id));
     }
 

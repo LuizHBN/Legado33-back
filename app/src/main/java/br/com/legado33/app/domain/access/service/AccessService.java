@@ -38,9 +38,13 @@ public class AccessService {
         return new ReadAccessDTO(savedAccess);
     }
 
-    public ReadAccessDTO findAccessById(Long id) {
+    public ReadAccessDTO findReadAccessDTOById(Long id) {
         return accessRepository.findById(id)
                 .map(ReadAccessDTO::new)
+                .orElseThrow(() -> new AccessNotFoundException(id));
+    }
+    public Access findAccessById(Long id) {
+        return accessRepository.findById(id)
                 .orElseThrow(() -> new AccessNotFoundException(id));
     }
 

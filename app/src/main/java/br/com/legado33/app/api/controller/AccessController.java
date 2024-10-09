@@ -49,7 +49,7 @@ public class AccessController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ReadAccessDTO> getAccessById(@PathVariable Long id) {
-        return ResponseEntity.ok(accessService.findAccessById(id));
+        return ResponseEntity.ok(accessService.findReadAccessDTOById(id));
     }
 
     @PutMapping("/update/{id}")

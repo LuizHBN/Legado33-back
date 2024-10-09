@@ -6,9 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -16,8 +13,6 @@ import br.com.legado33.app.api.controller.dto.request.newDTO.NewCategoryDTO;
 import br.com.legado33.app.api.controller.dto.response.ReadCategoryDTO;
 import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateCategoryDTO;
 import br.com.legado33.app.domain.category.service.CategoryService;
-
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -69,13 +64,13 @@ public class CategoryControllerTest {
     void testGetCategoryById() {
         Long id = 1L; // Valor mantido
         ReadCategoryDTO readCategoryDTO = new ReadCategoryDTO(1L, "Categoria Teste"); // Valor substituído
-        when(categoryService.findCategoryById(id)).thenReturn(readCategoryDTO);
+        when(categoryService.findReadCategoryDTOById(id)).thenReturn(readCategoryDTO);
 
         ResponseEntity<ReadCategoryDTO> response = categoryController.getCategoryById(id);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(readCategoryDTO, response.getBody());
-        verify(categoryService, times(1)).findCategoryById(id);
+        verify(categoryService, times(1)).findReadCategoryDTOById(id);
     }
 
     @Test

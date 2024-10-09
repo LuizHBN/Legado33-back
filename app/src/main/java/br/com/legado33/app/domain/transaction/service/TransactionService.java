@@ -8,7 +8,6 @@ import br.com.legado33.app.api.controller.dto.request.newDTO.NewTransactionDTO;
 import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateTransactionDTO;
 import br.com.legado33.app.api.controller.dto.response.ReadCampaignDTO;
 import br.com.legado33.app.api.controller.dto.response.ReadTransactionDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadUserDTO;
 import br.com.legado33.app.domain.campaign.Campaign;
 import br.com.legado33.app.domain.campaign.service.CampaignService;
 import br.com.legado33.app.domain.transaction.Transaction;
@@ -31,19 +30,16 @@ public class TransactionService {
     }
 
     public ReadTransactionDTO saveNewTransaction(NewTransactionDTO transactionDTO) {
-        ReadUserDTO userDTO = userService.findUserById(transactionDTO.user().getId());
-        User user = new User(userDTO);
-        
+        User user = userService.findUserById(transactionDTO.user().getId());
         Campaign campaign = null;
         if (transactionDTO.campaign() != null) {
-            ReadCampaignDTO campaignDTO = campaignService.findCampaignById(transactionDTO.campaign().getId());
-            campaign = new Campaign(campaignDTO);
+            campaign = campaignService.findCampaignById(transactionDTO.campaign().getId());
         }
-    
         Transaction transaction = new Transaction(transactionDTO, user, campaign);
         Transaction savedTransaction = transactionRepository.save(transaction);
         return new ReadTransactionDTO(savedTransaction);
     }
+
     public Page<ReadTransactionDTO> getAllTransactions(Pageable page) {
         return transactionRepository.findAll(page).map(ReadTransactionDTO::new);
     }

@@ -25,10 +25,15 @@ public class WorshipMaterialService {
     }
 
     public ReadWorshipMaterialDTO saveNewWorshipMaterial(NewWorshipMaterialDTO worshipMaterialDTO) {
-        ReadWorshipDTO worshipDTO = worshipService.findWorshipById(worshipMaterialDTO.worship().getId());
-        Worship worship = new Worship(worshipDTO);
+        // Encontre o culto existente
+        Worship worship =  worshipService.findWorshipById(worshipMaterialDTO.worship().getId());
+
+        // Crie o objeto WorshipMaterial usando a instância persistida de Worship
         WorshipMaterial worshipMaterial = new WorshipMaterial(worshipMaterialDTO, worship);
+
+        // Salve o WorshipMaterial
         WorshipMaterial savedWorshipMaterial = worshipMaterialRepository.save(worshipMaterial);
+
         return new ReadWorshipMaterialDTO(savedWorshipMaterial);
     }
 
@@ -36,9 +41,14 @@ public class WorshipMaterialService {
         return worshipMaterialRepository.findAll(page).map(ReadWorshipMaterialDTO::new);
     }
 
-    public ReadWorshipMaterialDTO findWorshipMaterialById(Long id) {
+    public ReadWorshipMaterialDTO findReadWorshipMaterialDTOById(Long id) {
         return worshipMaterialRepository.findById(id)
                 .map(ReadWorshipMaterialDTO::new)
+                .orElseThrow(() -> new WorshipMaterialNotFoundException(id));
+    }
+
+    public WorshipMaterial findWorshipMaterialById(Long id) {
+        return worshipMaterialRepository.findById(id)
                 .orElseThrow(() -> new WorshipMaterialNotFoundException(id));
     }
 
@@ -67,7 +77,7 @@ public class WorshipMaterialService {
             worshipMaterial.setComment(worshipMaterialDTO.comment());
         }
         if (!worshipMaterialDTO.worship().equals(worshipMaterial.getWorship())) {
-            ReadWorshipDTO worshipDTO = worshipService.findWorshipById(worshipMaterialDTO.worship().getId());
+            ReadWorshipDTO worshipDTO = worshipService.findReadWorshipDTOById(worshipMaterialDTO.worship().getId());
             Worship worship = new Worship(worshipDTO);
             worshipMaterial.setWorship(worship);
         }

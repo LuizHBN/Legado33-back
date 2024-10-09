@@ -27,9 +27,14 @@ public class CategoryService {
         return new ReadCategoryDTO(savedCategory);
     }
 
-    public ReadCategoryDTO findCategoryById(Long id){
+    public ReadCategoryDTO findReadCategoryDTOById(Long id){
         return categoryRepository.findById(id)
                 .map(ReadCategoryDTO::new)
+                .orElseThrow(() -> new CategoryNotFoundException(id));
+    }
+
+    public Category findCategoryById(Long id){
+        return categoryRepository.findById(id)
                 .orElseThrow(() -> new CategoryNotFoundException(id));
     }
 

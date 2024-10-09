@@ -30,9 +30,14 @@ public class CampaignService {
         return campaignRepository.findAll(page).map(ReadCampaignDTO :: new);
     }
 
-    public ReadCampaignDTO findCampaignById(Long id) {
+    public ReadCampaignDTO findReadCampaignDTOById(Long id) {
         return  campaignRepository.findById(id)
                 .map(ReadCampaignDTO::new)
+                .orElseThrow(() -> new CampaignNotFoundException(id));
+    }
+
+    public Campaign findCampaignById(Long id) {
+        return  campaignRepository.findById(id)
                 .orElseThrow(() -> new CampaignNotFoundException(id));
     }
 

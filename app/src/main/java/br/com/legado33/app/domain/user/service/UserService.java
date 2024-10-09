@@ -34,9 +34,14 @@ public class UserService {
         return new ReadUserDTO(savedUser);
     }
 
-    public ReadUserDTO findUserById(Long id) {
+    public ReadUserDTO findReadUserDTOById(Long id) {
         return userRepository.findById(id)
                 .map(ReadUserDTO::new)
+                .orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    public User findUserById(Long id) {
+        return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
@@ -68,7 +73,7 @@ public class UserService {
     }
     public User updateUserAccessFromDTO(UpdateUserAccessDTO userDTO, User user) {
         if(!userDTO.access().equals(user.getAccess())){
-            Access access = new Access(accessService.findAccessById(userDTO.access().getId()));
+            Access access = new Access(accessService.findReadAccessDTOById(userDTO.access().getId()));
             user.setAccess(access);
         }
         return user;

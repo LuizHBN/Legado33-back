@@ -27,9 +27,14 @@ public class WorshipService {
         return new ReadWorshipDTO(savedWorship);
     }
 
-    public ReadWorshipDTO findWorshipById(Long id){
+    public ReadWorshipDTO findReadWorshipDTOById(Long id){
         return worshipRepository.findById(id)
                 .map(ReadWorshipDTO::new)
+                .orElseThrow(() -> new WorshipNotFoundException(id));
+    }
+
+    public Worship findWorshipById(Long id){
+        return worshipRepository.findById(id)
                 .orElseThrow(() -> new WorshipNotFoundException(id));
     }
 
