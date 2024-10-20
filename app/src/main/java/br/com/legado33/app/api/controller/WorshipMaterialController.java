@@ -39,7 +39,7 @@ public class WorshipMaterialController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ReadWorshipMaterialDTO> getWorshipMaterialById(@PathVariable Long id) {
-        return  ResponseEntity.ok(worshipMaterialService.findWorshipMaterialById(id));
+        return  ResponseEntity.ok(worshipMaterialService.findReadWorshipMaterialDTOById(id));
     }
 
     @PutMapping("/update/{id}")

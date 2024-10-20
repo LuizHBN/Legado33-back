@@ -40,7 +40,7 @@ public class CampaignController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<ReadCampaignDTO> getAccessById(@PathVariable Long id){
-            return ResponseEntity.ok(campaignService.findCampaignById(id));
+            return ResponseEntity.ok(campaignService.findReadCampaignDTOById(id));
     }
 
     @PutMapping("/update/{id}")

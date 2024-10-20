@@ -61,16 +61,16 @@ public class ConversationServiceTest {
     }
 
     @Test
-    void testFindConversationById_Found() {
+    void testFindReadConversationDTOById_Found() {
         when(conversationRepository.findById(anyLong())).thenReturn(Optional.of(new Conversation()));
-        conversationService.findConversationById(1L);
+        conversationService.findReadConversationDTOById(1L);
         verify(conversationRepository).findById(anyLong());
     }
 
     @Test
-    void testFindConversationById_NotFound() {
+    void testFindReadConversationDTOById_NotFound() {
         when(conversationRepository.findById(anyLong())).thenReturn(Optional.empty());
-        assertThrows(ConversationNotFoundException.class, () -> conversationService.findConversationById(1L));
+        assertThrows(ConversationNotFoundException.class, () -> conversationService.findReadConversationDTOById(1L));
     }
 
     @Test

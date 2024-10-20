@@ -39,7 +39,7 @@ public class ConversationController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<ReadConversationDTO> getConversationById(@PathVariable Long id){
-            return ResponseEntity.ok(conversationService.findConversationById(id));
+            return ResponseEntity.ok(conversationService.findReadConversationDTOById(id));
     }
 
     @PutMapping("/update/{id}")

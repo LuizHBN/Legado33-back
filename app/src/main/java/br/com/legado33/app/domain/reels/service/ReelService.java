@@ -26,8 +26,7 @@ public class ReelService {
 
     public ReadReelDTO saveNewReel(NewReelDTO reelDTO) {
         //TODO -> Test sending a unreacheable category
-            ReadCategoryDTO categoryDTO = categoryService.findCategoryById(reelDTO.category());
-            Category category = new Category(categoryDTO);
+            Category category = categoryService.findCategoryById(reelDTO.category());
             Reel reel = new Reel(reelDTO, category);
             Reel savedReel = reelRepository.save(reel);
             return new ReadReelDTO(savedReel);
@@ -65,7 +64,7 @@ public class ReelService {
             reel.setDescription(reelDTO.description());
         }
         if (!reelDTO.category().equals(reel.getCategory())) {
-            ReadCategoryDTO categoryDTO = categoryService.findCategoryById(reelDTO.category().getId());
+            ReadCategoryDTO categoryDTO = categoryService.findReadCategoryDTOById(reelDTO.category().getId());
             Category category = new Category(categoryDTO);
                 reel.setCategory(category);}
         return reel;
