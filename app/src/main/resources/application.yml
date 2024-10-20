@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: app
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+server:
+  port: 8080
+
+# cognito:
+#   identityPoolId: ${AWS_COGNITO_POOLID}
+#   region: us-east-1
+#   token-validity-period: 15m
