@@ -5,10 +5,18 @@ spring:
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
+  security:
+    oauth2:
+      client:
+        registration:
+          cognito:
+            client-id: ${AWS_COGNITO_CLIENTID}
+            client-secret: ${AWS_COGNITO_CLIENTSECRET}
+            scope: openid
+            redirect-uri: http://localhost:8080/login/oauth2/code/cognito
+            client-name: Cognito
+        provider:
+          cognito:
+            issuer-uri: https://cognito-idp.us-east-1.amazonaws.com/${AWS_COGNITO_POOLID}   
 server:
   port: 8080
-
-# cognito:
-#   identityPoolId: ${AWS_COGNITO_POOLID}
-#   region: us-east-1
-#   token-validity-period: 15m
