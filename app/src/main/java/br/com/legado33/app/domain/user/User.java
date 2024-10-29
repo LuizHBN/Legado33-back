@@ -43,9 +43,9 @@ public class User {
     @JoinColumn(name = "id_acesso", referencedColumnName = "id")
     private Access access;
 
-    public User(NewUserDTO userDTO){
-        this.name = userDTO.name();
-        this.mail = userDTO.mail();
+    public User(String name, String mail){
+        this.name = name;
+        this.mail = mail;
         this.access = new Access();
     }
 

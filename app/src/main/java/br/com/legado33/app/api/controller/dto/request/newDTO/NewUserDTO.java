@@ -14,7 +14,11 @@ public record NewUserDTO(
         @NotNull
         @Email
         @Size(max = 1020)
-        String mail
+        String mail,
+        @NotBlank
+        @NotNull
+        @Size(max = 50)
+        String password
 )  {
 
 }

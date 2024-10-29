@@ -32,8 +32,8 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ReadUserDTO> createUser(@RequestBody @Valid NewUserDTO userDTO){
-        return ResponseEntity.ok(userService.saveNewUser(userDTO));
+    public ResponseEntity<Object> createUser(@RequestBody @Valid NewUserDTO userDTO){
+        return ResponseEntity.ok(userService.signUp(userDTO)); // aqui manda pro DB
     }
 
     @GetMapping
