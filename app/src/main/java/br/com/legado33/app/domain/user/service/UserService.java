@@ -1,7 +1,9 @@
 package br.com.legado33.app.domain.user.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -20,9 +22,7 @@ import br.com.legado33.app.domain.user.exception.UserNotFoundException;
 import br.com.legado33.app.domain.user.repository.UserRepository;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeType;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.CognitoIdentityProviderException;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpRequest;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
 
 @Service
 public class UserService { 
@@ -33,11 +33,13 @@ public class UserService {
     private final AccessService accessService;
     @Value("${spring.security.oauth2.client.registration.cognito.client-id}")
     private String clientId;
+    @Value("${AWS_COGNITO_POOLID}")
+    private String userPoolId;
 
 
     // MARK: - Private Functions
-    private ReadUserDTO saveNewUser(String name, String mail) {
-        User user = new User(name, mail);
+    private ReadUserDTO saveNewUser(NewUserDTO userDTO) {
+        User user = new User(userDTO);
         User savedUser = userRepository.save(user);
         return new ReadUserDTO(savedUser);
     }
@@ -124,10 +126,38 @@ public class UserService {
 
             this.identityProviderClient.signUp(signUpRequest);
             System.out.println("User has been signed up ");
-            return ResponseEntity.ok(this.saveNewUser(userDTO.name(), userDTO.mail()));
+            return ResponseEntity.ok(this.saveNewUser(userDTO));
         } catch (CognitoIdentityProviderException e) {
             System.err.println(e.awsErrorDetails().errorMessage());
             return ResponseEntity.badRequest().body("Error: " + e.awsErrorDetails().errorMessage());
         }
     }
+
+    public ResponseEntity<Object> login(NewUserDTO userDTO) {
+        try {
+            // Cria uma solicitação de autenticação com o nome de usuário e senha
+            Map<String, String> authParams = new HashMap<>();
+            authParams.put("USERNAME", userDTO.name());
+            authParams.put("PASSWORD", userDTO.password());
+
+            AdminInitiateAuthRequest authRequest = AdminInitiateAuthRequest.builder()
+                    .authFlow(AuthFlowType.ADMIN_NO_SRP_AUTH) // Autenticação com nome de usuário e senha
+                    .clientId(this.clientId)
+                    .userPoolId(this.userPoolId) // Especifique o ID do User Pool
+                    .authParameters(authParams)
+                    .build();
+
+            // Envia a solicitação de autenticação
+            AdminInitiateAuthResponse authResponse = this.identityProviderClient.adminInitiateAuth(authRequest);
+
+
+            System.out.println("User has been logged in successfully");
+            return ResponseEntity.ok(authResponse.authenticationResult().idToken());
+
+        } catch (CognitoIdentityProviderException e) {
+            System.err.println(e.awsErrorDetails().errorMessage());
+            return ResponseEntity.badRequest().body("Error: " + e.awsErrorDetails().errorMessage());
+        }
+    }
+
 }

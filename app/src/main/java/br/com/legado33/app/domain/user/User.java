@@ -55,4 +55,10 @@ public class User {
         this.mail = userDTO.mail();
         this.access = new Access();
     }
+
+    public User(NewUserDTO userDTO) {
+        this.name = userDTO.name();
+        this.mail = userDTO.mail();
+        this.access = new Access();
+    }
 }

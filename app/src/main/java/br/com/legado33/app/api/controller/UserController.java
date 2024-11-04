@@ -33,7 +33,11 @@ public class UserController {
 
     @PostMapping("/save")
     public ResponseEntity<Object> createUser(@RequestBody @Valid NewUserDTO userDTO){
-        return ResponseEntity.ok(userService.signUp(userDTO)); // aqui manda pro DB
+        return ResponseEntity.ok(userService.signUp(userDTO));
+    }
+    @PostMapping("/login")
+    public ResponseEntity<Object> UserLogin (@RequestBody @Valid NewUserDTO userDTO){
+        return ResponseEntity.ok(userService.login(userDTO));
     }
 
     @GetMapping

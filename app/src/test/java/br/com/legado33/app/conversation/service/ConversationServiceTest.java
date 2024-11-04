@@ -39,8 +39,8 @@ public class ConversationServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        NewUserDTO userDTO1 = new NewUserDTO("NomeUsuario1", "emailusuario1@example.com");
-        NewUserDTO userDTO2 = new NewUserDTO("NomeUsuario2", "emailusuario2@example.com");
+        NewUserDTO userDTO1 = new NewUserDTO("NomeUsuario1", "emailusuario1@example.com", "12345678");
+        NewUserDTO userDTO2 = new NewUserDTO("NomeUsuario2", "emailusuario2@example.com","12345678");
         user1 = new User(userDTO1);
         user2 = new User(userDTO2);
     }
