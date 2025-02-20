@@ -1,11 +1,11 @@
 package br.com.legado33.app.domain.campaign.service;
 
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewCampaignDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateCampaignDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadCampaignDTO;
 import br.com.legado33.app.domain.campaign.Campaign;
 import br.com.legado33.app.domain.campaign.exception.CampaignNotFoundException;
 import br.com.legado33.app.domain.campaign.repository.CampaignRepository;
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewCampaignDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadCampaignDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateCampaignDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

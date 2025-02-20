@@ -1,11 +1,11 @@
 package br.com.legado33.app.domain.category.service;
 
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewCategoryDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateCategoryDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadCategoryDTO;
 import br.com.legado33.app.domain.category.Category;
 import br.com.legado33.app.domain.category.exception.CategoryNotFoundException;
 import br.com.legado33.app.domain.category.repository.CategoryRepository;
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewCategoryDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadCategoryDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateCategoryDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

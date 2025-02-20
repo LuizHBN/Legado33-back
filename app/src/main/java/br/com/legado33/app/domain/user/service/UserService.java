@@ -1,16 +1,5 @@
 package br.com.legado33.app.domain.user.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
 import br.com.legado33.app.api.controller.dto.request.newDTO.NewUserDTO;
 import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateUserAccessDTO;
 import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateUserDTO;
@@ -20,14 +9,20 @@ import br.com.legado33.app.domain.access.service.AccessService;
 import br.com.legado33.app.domain.user.User;
 import br.com.legado33.app.domain.user.exception.UserNotFoundException;
 import br.com.legado33.app.domain.user.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeType;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.AuthFlowType;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.CognitoIdentityProviderException;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthRequest;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpRequest;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService { 
@@ -38,9 +33,6 @@ public class UserService {
     private final AccessService accessService;
     @Value("${spring.security.oauth2.client.registration.cognito.client-id}")
     private String clientId;
-    @Value("${AWS_COGNITO_POOLID}")
-    private String userPoolId;
-
 
     // MARK: - Private Functions
     private ReadUserDTO saveNewUser(NewUserDTO userDTO) {

@@ -1,11 +1,11 @@
 package br.com.legado33.app.domain.news.service;
 
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewNewsDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateNewsDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadNewsDTO;
 import br.com.legado33.app.domain.news.News;
 import br.com.legado33.app.domain.news.exception.NewsNotFoundException;
 import br.com.legado33.app.domain.news.repository.NewsRepository;
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewNewsDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadNewsDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateNewsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

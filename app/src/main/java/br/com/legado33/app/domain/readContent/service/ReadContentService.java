@@ -1,14 +1,14 @@
 package br.com.legado33.app.domain.readContent.service;
 
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewReadContentDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateReadContentDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadReadContentDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadWorshipMaterialDTO;
+import br.com.legado33.app.domain.readContent.ReadContent;
 import br.com.legado33.app.domain.readContent.exception.ReadContentNotFoundException;
 import br.com.legado33.app.domain.readContent.repository.ReadContentRepository;
-import br.com.legado33.app.domain.worshipMaterial.service.WorshipMaterialService;
 import br.com.legado33.app.domain.worshipMaterial.WorshipMaterial;
-import br.com.legado33.app.domain.readContent.ReadContent;
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewReadContentDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadReadContentDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateReadContentDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadWorshipMaterialDTO;
+import br.com.legado33.app.domain.worshipMaterial.service.WorshipMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

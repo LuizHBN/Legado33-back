@@ -1,9 +1,5 @@
 package br.com.legado33.app.domain.access.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
 import br.com.legado33.app.api.controller.dto.request.newDTO.NewAccessDTO;
 import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateAccessDTO;
 import br.com.legado33.app.api.controller.dto.response.ReadAccessDTO;
@@ -11,6 +7,9 @@ import br.com.legado33.app.domain.access.Access;
 import br.com.legado33.app.domain.access.exception.AccessNotFoundException;
 import br.com.legado33.app.domain.access.repository.AccessRepository;
 import br.com.legado33.app.domain.user.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AccessService {

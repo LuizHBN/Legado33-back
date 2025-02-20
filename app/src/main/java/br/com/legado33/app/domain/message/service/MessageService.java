@@ -1,18 +1,16 @@
 package br.com.legado33.app.domain.message.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
 import br.com.legado33.app.api.controller.dto.request.newDTO.NewMessageDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadConversationDTO;
 import br.com.legado33.app.api.controller.dto.response.ReadMessageDTO;
 import br.com.legado33.app.domain.conversation.Conversation;
 import br.com.legado33.app.domain.conversation.service.ConversationService;
 import br.com.legado33.app.domain.message.Message;
 import br.com.legado33.app.domain.message.exception.MessageNotFoundException;
 import br.com.legado33.app.domain.message.repository.MessageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 @Service
 public class MessageService {

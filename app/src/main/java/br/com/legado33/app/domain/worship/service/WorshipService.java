@@ -1,10 +1,10 @@
 package br.com.legado33.app.domain.worship.service;
 
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewWorshipDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateWorshipDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadWorshipDTO;
 import br.com.legado33.app.domain.worship.Worship;
 import br.com.legado33.app.domain.worship.exception.WorshipNotFoundException;
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewWorshipDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadWorshipDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateWorshipDTO;
 import br.com.legado33.app.domain.worship.repository.WorshipRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

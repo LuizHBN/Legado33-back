@@ -1,14 +1,14 @@
 package br.com.legado33.app.domain.reels.service;
 
+import br.com.legado33.app.api.controller.dto.request.newDTO.NewReelDTO;
+import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateReelDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadCategoryDTO;
+import br.com.legado33.app.api.controller.dto.response.ReadReelDTO;
 import br.com.legado33.app.domain.category.Category;
 import br.com.legado33.app.domain.category.service.CategoryService;
 import br.com.legado33.app.domain.reels.Reel;
 import br.com.legado33.app.domain.reels.exception.ReelNotFoundException;
 import br.com.legado33.app.domain.reels.repository.ReelRepository;
-import br.com.legado33.app.api.controller.dto.response.ReadCategoryDTO;
-import br.com.legado33.app.api.controller.dto.request.newDTO.NewReelDTO;
-import br.com.legado33.app.api.controller.dto.response.ReadReelDTO;
-import br.com.legado33.app.api.controller.dto.request.updateDTO.UpdateReelDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
