@@ -20,9 +20,14 @@ import br.com.legado33.app.domain.access.service.AccessService;
 import br.com.legado33.app.domain.user.User;
 import br.com.legado33.app.domain.user.exception.UserNotFoundException;
 import br.com.legado33.app.domain.user.repository.UserRepository;
+import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
-import software.amazon.awssdk.services.cognitoidentityprovider.model.*;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeType;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.AuthFlowType;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.CognitoIdentityProviderException;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthRequest;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.SignUpRequest;
 
 @Service
 public class UserService { 
@@ -46,7 +51,10 @@ public class UserService {
 
     // MARK: - Public Functions
     public UserService(UserRepository repository, AccessService accessService) {
-        this.identityProviderClient = CognitoIdentityProviderClient.builder().region(Region.US_EAST_1).build(); // TODO: Remover esse mock e testar 
+        this.identityProviderClient = CognitoIdentityProviderClient.builder()
+                .region(Region.US_EAST_1)
+                .credentialsProvider(DefaultCredentialsProvider.create())
+                .build();
         this.userRepository = repository;
         this.accessService = accessService;
     }
@@ -135,21 +143,17 @@ public class UserService {
 
     public ResponseEntity<Object> login(NewUserDTO userDTO) {
         try {
-            // Cria uma solicitação de autenticação com o nome de usuário e senha
-            Map<String, String> authParams = new HashMap<>();
-            authParams.put("USERNAME", userDTO.name());
-            authParams.put("PASSWORD", userDTO.password());
+            Map<String, String> authParameters = new HashMap<>();
+            authParameters.put("USERNAME", userDTO.name());
+            authParameters.put("PASSWORD", userDTO.password());
 
-            AdminInitiateAuthRequest authRequest = AdminInitiateAuthRequest.builder()
-                    .authFlow(AuthFlowType.ADMIN_NO_SRP_AUTH) // Autenticação com nome de usuário e senha
+            InitiateAuthRequest authRequest = InitiateAuthRequest.builder()
                     .clientId(this.clientId)
-                    .userPoolId(this.userPoolId) // Especifique o ID do User Pool
-                    .authParameters(authParams)
+                    .authFlow(AuthFlowType.USER_PASSWORD_AUTH)
+                    .authParameters(authParameters)
                     .build();
 
-            // Envia a solicitação de autenticação
-            AdminInitiateAuthResponse authResponse = this.identityProviderClient.adminInitiateAuth(authRequest);
-
+            var authResponse = identityProviderClient.initiateAuth(authRequest);
 
             System.out.println("User has been logged in successfully");
             return ResponseEntity.ok(authResponse.authenticationResult().idToken());
@@ -159,5 +163,4 @@ public class UserService {
             return ResponseEntity.badRequest().body("Error: " + e.awsErrorDetails().errorMessage());
         }
     }
-
 }
